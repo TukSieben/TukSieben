@@ -1,43 +1,61 @@
 body {
   font-family: 'Inter', Arial, sans-serif;
-  background: #f8fafc;
-  color: #222;
+  background: #111a15;
+  color: #d7ffdb;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+#bg-faden {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background: transparent;
 }
 
 main {
   max-width: 500px;
-  margin: 48px auto 0 auto;
-  background: #fff;
+  margin: 64px auto 0 auto;
+  background: rgba(16, 32, 24, 0.92);
   padding: 36px 24px 18px 24px;
-  border-radius: 14px;
-  box-shadow: 0 2px 16px #0001;
+  border-radius: 16px;
+  box-shadow: 0 4px 36px #00994b33;
   text-align: center;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(2px);
 }
 
 nav {
   margin-bottom: 18px;
 }
 nav a {
-  color: #0072ff;
+  color: #7aff7a;
   text-decoration: none;
   margin: 0 12px;
   font-weight: 600;
   font-size: 1.05rem;
   transition: color 0.2s;
+  text-shadow: 0 0 6px #07ff48aa;
 }
 nav a:hover {
-  color: #0056b3;
+  color: #d7ffdb;
+  text-shadow: 0 0 14px #39ff8d;
 }
 
 h1 {
   font-size: 2.2rem;
   margin-bottom: 0;
+  color: #7aff7a;
+  text-shadow: 0 0 12px #3bff86b8;
 }
 
 .subtitle {
-  color: #666;
+  color: #b8ffcc;
   font-size: 1.1rem;
   margin-top: 6px;
   margin-bottom: 18px;
@@ -46,6 +64,8 @@ h1 {
 h2 {
   margin-top: 32px;
   font-size: 1.25rem;
+  color: #88ffbb;
+  text-shadow: 0 0 10px #52ff8e66;
 }
 
 ul {
@@ -53,35 +73,39 @@ ul {
   margin: 0 auto 16px auto;
   padding-left: 20px;
   max-width: 350px;
+  color: #e6ffe6;
 }
 
 .cta {
   display: inline-block;
   margin-top: 10px;
-  background: #0072ff;
-  color: #fff;
+  background: linear-gradient(90deg, #08ff7c 0%, #00ffb2 100%);
+  color: #1a2a1b;
   font-weight: 600;
   text-decoration: none;
   border-radius: 7px;
   padding: 12px 28px;
-  transition: background 0.2s;
+  box-shadow: 0 2px 20px #00ffb233;
+  transition: background 0.2s, color 0.2s;
 }
 .cta:hover {
-  background: #0056b3;
+  background: linear-gradient(90deg, #00994b 0%, #00c87a 100%);
+  color: #fff;
 }
 
 footer {
-  color: #888;
+  color: #49ff93;
   font-size: 0.95rem;
   margin-top: 30px;
 }
 
 footer a {
-  color: #0072ff;
-  text-decoration: none;
+  color: #7aff7a;
+  text-decoration: underline;
 }
 footer a:hover {
-  text-decoration: underline;
+  color: #fff;
+  text-shadow: 0 0 9px #39ff8d;
 }
 
 @media (max-width: 600px) {
