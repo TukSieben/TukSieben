@@ -1,18 +1,156 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MoodgeBot Befehle</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moodgebot Commands</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+  
+	  .search-container {
+    flex-grow: 1;
+    margin: 0 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-container input {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.5rem 1rem;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #f0f0f0;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .search-container input:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 5px #4caf50;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0d0d0d;
+      color: #f0f0f0;
+    }
+
+    header {
+      background-color: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4caf50;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #4caf50;
+      margin-bottom: 2rem;
+    }
+
+    .command {
+      background-color: #1a1a1a;
+      border-left: 4px solid #4caf50;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+    }
+
+    .command strong {
+      color: #ffffff;
+    }
+
+    .command code {
+      background-color: #2a2a2a;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: #4caf50;
+      font-family: monospace;
+    }
+  </style>
 </head>
 <body>
-  <h1>📜 MoodgeBot Befehle</h1>
-  <ul>
-    <li><code>!uptime</code> – Zeigt wie lange der Stream läuft</li>
-    <li><code>!followage</code> – Zeigt wie lange ein Nutzer dir folgt</li>
-    <li><code>!quote</code> – Gibt ein zufälliges Zitat aus</li>
-    <li><code>!hug [name]</code> – Umarmt jemanden im Chat ❤️</li>
-  </ul>
-  <a href="index.html">⬅ Zurück</a>
+	<header>
+		<div class="logo">MoodgeBot</div>
+		<div class="search-container">
+		<input type="text" id="search" placeholder="Search commands...">
+		</div>
+	</header>
+
+  <main>
+    <h1>Commands</h1>
+
+    <div class="command"><strong>-levelinfo</strong><br>Zeigt, wie viele Level es gibt und ab wann Prestige möglich ist.</div>
+    <div class="command"><strong>-prestigeinfo</strong><br>Listet alle Prestige-Symbole und erklärt den XP-Bonus pro Prestige.</div>
+    <div class="command"><strong>-prestige</strong><br>Setzt dich nach Level 15 auf Level 1 zurück, erhöht dein Prestige-Level und gibt dir dauerhaft mehr XP pro Aktion.</div>
+    <div class="command"><strong>-m / -moodi</strong><br>Moodi grinden, XP und Moodi verdienen (mit Streak- und Prestige-Bonus, 1h Cooldown).</div>
+    <div class="command"><strong>-case</strong><br>Öffnet eine virtuelle CS:GO-Case für 150 Moodi. 60s Cooldown pro User.</div>
+    <div class="command"><strong>-steal / -s</strong><br>Versuche, einem zufälligen User Moodi zu stehlen.</div>
+    <div class="command"><strong>-points</strong><br>Zeigt deine (oder eines Users) Moodi, XP, Level, Prestige und Streak.</div>
+    <div class="command"><strong>-stats</strong><br>Zeigt detaillierte Stats (Moodi, XP, Level, Streak, letzter Moodi).</div>
+    <div class="command"><strong>-top</strong><br>Zeigt die Top 5 User nach Moodi.</div>
+    <div class="command"><strong>-toplevel</strong><br>Zeigt die Top 5 User nach Level/XP.</div>
+    <div class="command"><strong>-gamble &lt;Betrag|all|half&gt;</strong><br>Moodi setzen und mit Glück verdoppeln oder verlieren.</div>
+    <div class="command"><strong>-daily</strong><br>Täglicher Bonus (Moodi & XP, einmal pro Tag).</div>
+    <div class="command"><strong>-afk [Grund]</strong><br>Setzt dich auf AFK, optional mit Grund.</div>
+    <div class="command"><strong>-gn [Grund]</strong><br>Setzt dich auf Schlafen, optional mit Grund.</div>
+    <div class="command"><strong>-remind &lt;nutzer&gt; &lt;nachricht&gt;</strong><br>Speichert eine Nachricht für den Nutzer.</div>
+    <div class="command"><strong>-help</strong><br>Zeigt den Link zu allen Befehlen & Erklärungen.</div>
+    <div class="command"><strong>-uptime</strong><br>Zeigt die Stream-Uptime.</div>
+    <div class="command"><strong>-twitter, -youtube, -discord</strong><br>Zeigt Social-Links.</div>
+    <div class="command"><strong>-cat</strong><br>Zeigt ein Katzenbild.</div>
+    <div class="command"><strong>-dog</strong><br>Zeigt ein Hundebild.</div>
+    <div class="command"><strong>-joke</strong><br>Zufälliger Witz.</div>
+    <div class="command"><strong>-8ball</strong><br>Magische 8-Ball-Antwort.</div>
+    <div class="command"><strong>-user / -u</strong><br>Zeigt Twitch-Infos zu einem Nutzer.</div>
+    <div class="command"><strong>-badge</strong><br>Zeigt das 7TV-Badge eines Users.</div>
+    <div class="command"><strong>-paint</strong><br>Zeigt das 7TV-Paint eines Users.</div>
+    <div class="command"><strong>-pfp</strong><br>Zeigt das Twitch-Profilbild eines Users als Link im Chat.</div>
+    <div class="command"><strong>-mlu</strong><br>Zeigt dein MLU-Profil oder das eines anderen Users.</div>
+    <div class="command"><strong>-vanity</strong><br>Zeigt dein Vanity-Profil oder das eines anderen Users.</div>
+    <div class="command"><strong>-id</strong><br>Zeigt Twitch- und 7TV-ID.</div>
+    <div class="command"><strong>-7tvu</strong><br>Zeigt 7TV-Sub-Status.</div>
+
+    <h2 style="margin-top: 3rem; color: #4caf50;">Channel-Management (nur Owner)</h2>
+    <div class="command"><strong>-join</strong><br>Bot joint einen Kanal.</div>
+    <div class="command"><strong>-part</strong><br>Bot verlässt einen Kanal.</div>
+    <div class="command"><strong>-ping</strong><br>Zeigt die Bot-Uptime.</div>
+    <div class="command"><strong>-owner</strong><br>Zeigt den Bot-Owner.</div>
+  </main>
+  <script>
+  const searchInput = document.getElementById('search');
+  const commands = document.querySelectorAll('.command');
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    commands.forEach(cmd => {
+      cmd.classList.toggle('hidden', !cmd.textContent.toLowerCase().includes(query));
+    });
+  });
+</script>
 </body>
 </html>
