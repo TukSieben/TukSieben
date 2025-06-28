@@ -1,16 +1,114 @@
 body {
-  font-family: sans-serif;
-  padding: 2em;
-  background-color: #111;
-  color: #eee;
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f8fafc;
+  color: #222;
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+}
+
+header {
+  background: #fff;
+  border-bottom: 1px solid #ecf0f3;
+  padding: 36px 0 18px 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.7rem;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  color: #6f6f6f;
+  font-size: 1.2rem;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+nav {
+  margin-top: 12px;
 }
 nav a {
-  margin-right: 1em;
-  color: #72f5ff;
+  color: #0072ff;
   text-decoration: none;
+  margin: 0 18px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s;
 }
-pre {
-  background-color: #222;
-  padding: 0.5em;
-  border-radius: 4px;
+nav a:hover {
+  color: #0056b3;
+}
+
+main {
+  max-width: 600px;
+  background: #fff;
+  margin: 40px auto 0 auto;
+  padding: 36px 28px;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #0001;
+}
+
+section {
+  margin-bottom: 36px;
+}
+section:last-child {
+  margin-bottom: 0;
+}
+
+h2 {
+  color: #223;
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.6rem;
+}
+
+ul {
+  padding-left: 22px;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.cta {
+  display: inline-block;
+  background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 14px 32px;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px #0072ff22;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.cta:hover {
+  background: linear-gradient(90deg, #0056b3 0%, #00aaff 100%);
+  box-shadow: 0 4px 16px #0072ff33;
+}
+
+footer {
+  text-align: center;
+  color: #888;
+  font-size: 0.95rem;
+  padding: 22px 0;
+  margin-top: 48px;
+  background: none;
+  border-top: 1px solid #ecf0f3;
+}
+
+/* Mobile-Optimierung */
+@media (max-width: 700px) {
+  main {
+    padding: 20px 4vw;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  nav a {
+    font-size: 1rem;
+    margin: 0 8px;
+  }
 }
