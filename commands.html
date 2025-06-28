@@ -4,156 +4,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moodgebot Commands</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Inter', Arial, sans-serif;
-      background: #111a15;
-      color: #d7ffdb;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+  
+	  .search-container {
+    flex-grow: 1;
+    margin: 0 2rem;
+    display: flex;
+    justify-content: center;
+  }
 
-    #bg-faden {
-      position: fixed;
-      top: 0; 
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at 20% 80%, rgba(7, 255, 72, 0.1) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, rgba(0, 255, 178, 0.08) 0%, transparent 50%);
+  .search-container input {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.5rem 1rem;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #f0f0f0;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  .search-container input:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+    transform: scale(1.02);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0d0d0d;
+      color: #f0f0f0;
     }
 
     header {
-      background: rgba(16, 32, 24, 0.95);
+      background-color: #111;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 36px rgba(0, 153, 75, 0.2);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
       position: sticky;
       top: 0;
       z-index: 100;
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(122, 255, 122, 0.1);
     }
 
-    /* NEU: Flex-Container für Logo-Bild und Text */
-    .logo-container {
+    /* NEU: Container für das Logo-Bild und den Text im Header */
+    .header-logo-section {
         display: flex;
-        align-items: center; /* Vertikale Zentrierung */
+        align-items: center; /* Vertikal zentrieren */
         gap: 10px; /* Abstand zwischen Bild und Text */
     }
 
-    .logo-img {
-        width: 50px; /* Breite des Logos Bildes */
-        height: auto; /* Höhe automatisch anpassen */
-        vertical-align: middle; /* Optional: Für bessere Ausrichtung, falls nicht Flexbox */
+    .header-logo-section img {
+        width: 40px; /* Größe des Logo-Bildes im Header anpassen */
+        height: auto;
     }
 
     .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #7aff7a;
-      text-shadow: 0 0 12px rgba(59, 255, 134, 0.7);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4caf50;
       transition: all 0.3s ease;
       cursor: pointer;
     }
 
     .logo:hover {
-      color: #d7ffdb;
-      text-shadow: 0 0 20px rgba(57, 255, 141, 0.9);
+      color: #66bb6a;
+      text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
       transform: scale(1.05);
     }
 
-    .search-container {
-      flex-grow: 1;
-      margin: 0 2rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .search-container input {
-      width: 100%;
-      max-width: 400px;
-      padding: 0.8rem 1.2rem;
-      background: rgba(16, 32, 24, 0.8);
-      border: 1px solid rgba(122, 255, 122, 0.2);
-      border-radius: 12px;
-      color: #d7ffdb;
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(4px);
-    }
-
-    .search-container input:focus {
-      border-color: #7aff7a;
-      box-shadow: 0 0 20px rgba(122, 255, 122, 0.3);
-      transform: scale(1.02);
-      background: rgba(16, 32, 24, 0.95);
-    }
-
-    .search-container input::placeholder {
-      color: #88ffbb;
-      opacity: 0.7;
-    }
-
     main {
-      max-width: 900px;
-      margin: 64px auto 0 auto;
-      background: rgba(16, 32, 24, 0.92);
-      padding: 36px 24px 18px 24px;
-      border-radius: 16px;
-      box-shadow: 0 4px 36px rgba(0, 153, 75, 0.2);
-      position: relative;
-      z-index: 2;
-      backdrop-filter: blur(2px);
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
     }
 
-    /* NEU: Flex-Container für Commands-Bild und H1 */
-    .commands-header {
+    /* NEU: Container für das Commands-Bild und die H1-Überschrift */
+    .commands-header-container {
         display: flex;
-        align-items: center; /* Vertikale Zentrierung */
-        justify-content: center; /* Horizontale Zentrierung */
-        gap: 10px; /* Abstand zwischen Bild und Text */
+        align-items: center; /* Vertikal zentrieren */
+        justify-content: center; /* Horizontal zentrieren */
+        gap: 15px; /* Abstand zwischen Bild und H1 */
         margin-bottom: 2rem; /* Behält den ursprünglichen Abstand zum nächsten Element bei */
-        margin-top: -20px; /* Schiebt den gesamten Bereich 20px nach oben. Passe den Wert an! */
-        /* width: fit-content; */ /* Nicht notwendig, da justify-content: center das erledigt */
+        margin-top: -10px; /* Optional: Schiebt den gesamten Bereich leicht nach oben */
     }
 
-    .commands-header img {
-        width: 50px; /* Breite des Bildes */
-        height: auto; /* Höhe automatisch anpassen */
-        vertical-align: middle; /* Optional: Für bessere Ausrichtung */
+    .commands-header-container img {
+        width: 60px; /* Größe des Bildes neben "Commands" */
+        height: auto;
     }
 
     h1 {
-      /* text-align: center; */ /* Nicht mehr nötig, da der Flex-Container zentriert */
-      font-size: 2.2rem;
+      /* text-align: center; */ /* Nicht mehr direkt auf h1, sondern auf dem commands-header-container */
+      color: #4caf50;
+      /* margin-bottom: 2rem; */ /* Wird jetzt vom commands-header-container gesteuert */
       margin: 0; /* Wichtig: Entfernt den Standard-Margin des h1, wenn es in einem Flex-Container ist */
-      color: #7aff7a;
-      text-shadow: 0 0 12px rgba(59, 255, 134, 0.7);
-      font-weight: 700;
+      text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
     }
 
     .command {
-      background: rgba(16, 32, 24, 0.6);
-      border-left: 4px solid #7aff7a;
-      padding: 1.2rem;
+      background-color: #1a1a1a;
+      border-left: 4px solid #4caf50;
+      padding: 1rem;
       margin-bottom: 1rem;
-      border-radius: 12px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 6px;
+      transition: all 0.3s ease;
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(122, 255, 122, 0.1);
     }
 
     .command::before {
@@ -163,95 +130,66 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(122, 255, 122, 0.1), transparent);
-      transition: left 0.6s ease;
-    }
-
-    .command::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(122, 255, 122, 0.1) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-      z-index: -1;
+      background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+      transition: left 0.5s ease;
     }
 
     .command:hover {
-      background: rgba(26, 42, 32, 0.8);
-      border-left-color: #88ffbb;
-      border-left-width: 6px;
-      transform: translateY(-2px);
+      background-color: #222;
+      border-left-color: #66bb6a;
+      transform: translateY(-2px) scale(1.02);
       box-shadow: 
-        0 6px 20px rgba(0, 153, 75, 0.2),
-        0 0 15px rgba(122, 255, 122, 0.1);
-      border-color: rgba(122, 255, 122, 0.3);
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(76, 175, 80, 0.1);
     }
 
     .command:hover::before {
       left: 100%;
     }
 
-    .command:hover::after {
-      opacity: 1;
-    }
-
     .command:active {
-      transform: translateY(-1px);
+      transform: translateY(0) scale(1);
     }
 
     .command strong {
-      color: #d7ffdb;
-      font-weight: 600;
-      font-size: 1.05rem;
-      transition: all 0.3s ease;
+      color: #ffffff;
+      transition: color 0.3s ease;
     }
 
     .command:hover strong {
-      color: #7aff7a;
-      text-shadow: 0 0 8px rgba(122, 255, 122, 0.5);
+      color: #66bb6a;
+      text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
     }
 
     .command code {
-      background: rgba(122, 255, 122, 0.1);
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      color: #88ffbb;
-      font-family: 'SF Mono', Monaco, monospace;
-      font-size: 0.9rem;
+      background-color: #2a2a2a;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: #4caf50;
+      font-family: monospace;
       transition: all 0.3s ease;
-      border: 1px solid rgba(122, 255, 122, 0.2);
     }
 
     .command:hover code {
-      background: rgba(122, 255, 122, 0.2);
-      color: #7aff7a;
-      box-shadow: 0 0 12px rgba(122, 255, 122, 0.3);
-      border-color: rgba(122, 255, 122, 0.4);
+      background-color: #333;
+      color: #66bb6a;
+      box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
     }
 
-    .command-description {
-      color: #b8ffcc;
-      margin-top: 0.5rem;
-      line-height: 1.5;
+    /* Zusätzliche Animation für die Command-Liste */
+    .command:nth-child(odd):hover {
+      border-left-width: 8px;
     }
 
-    .hidden {
-      display: none;
+    .command:nth-child(even):hover {
+      border-left-width: 8px;
+      border-left-color: #81c784;
     }
 
-    /* Loading Animation */
+    /* Smooth Scroll Animation beim Laden */
     .command {
       opacity: 0;
-      animation: slideInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-    
-    .command:hover {
-      opacity: 1 !important;
+      animation: slideInUp 0.6s ease forwards;
     }
 
     .command:nth-child(1) { animation-delay: 0.1s; }
@@ -264,34 +202,23 @@
     .command:nth-child(8) { animation-delay: 0.45s; }
     .command:nth-child(9) { animation-delay: 0.5s; }
     .command:nth-child(10) { animation-delay: 0.55s; }
-    .command:nth-child(n+11) { animation-delay: calc(0.6s + (var(--i, 0) * 0.05s)); }
+    .command:nth-child(n+11) { animation-delay: 0.6s; }
 
     @keyframes slideInUp {
       from {
         opacity: 0;
-        transform: translateY(40px) scale(0.95);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
       }
-    }
-
-    /* Subtle Glow Animation */
-    @keyframes subtle-glow {
-      0%, 100% { box-shadow: 0 6px 20px rgba(0, 153, 75, 0.2), 0 0 15px rgba(122, 255, 122, 0.1); }
-      50% { box-shadow: 0 6px 20px rgba(0, 153, 75, 0.25), 0 0 18px rgba(122, 255, 122, 0.15); }
-    }
-
-    .command:hover {
-      animation: subtle-glow 3s ease-in-out infinite;
     }
 
     /* Responsive Design */
     @media (max-width: 768px) {
       main {
-        margin: 32px 16px 0 16px;
-        padding: 24px 16px;
+        padding: 1rem;
       }
       
       .search-container {
@@ -302,16 +229,25 @@
         padding: 1rem;
       }
       
+      .commands-header-container { /* Responsive Anpassung für Commands-Header */
+        gap: 10px;
+        margin-top: -5px; /* Bei kleineren Bildschirmen weniger nach oben schieben */
+      }
+
+      .commands-header-container img {
+        width: 40px; /* Bild kleiner machen auf Mobilgeräten */
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
       .logo {
         font-size: 1.5rem;
       }
       
       .command:hover {
-        transform: translateY(-1px);
-      }
-      
-      h1 {
-        font-size: 1.8rem;
+        transform: translateY(-1px) scale(1.01);
       }
     }
 
@@ -328,224 +264,71 @@
         font-size: 1.5rem;
       }
     }
-
-    /* Mouse tracking effect */
-    .command {
-      --x: 50%;
-      --y: 50%;
-    }
   </style>
 </head>
 <body>
-  <div id="bg-faden"></div>
-  
-  <header>
-    <div class="logo-container">
-        <img src="Moodge.png" alt="MoodgeBot Logo" class="logo-img">
-        <div class="logo">MoodgeBot</div>
-    </div>
-    <div class="search-container">
-      <input type="text" id="search" placeholder="Search commands...">
-    </div>
-  </header>
+	<div id="bg-faden"></div>
+	
+	<header>
+		<div class="header-logo-section">
+            <img src="Moodge.png" alt="MoodgeBot Logo" class="logo-img">
+            <div class="logo">MoodgeBot</div>
+		</div>
+		<div class="search-container">
+			<input type="text" id="search" placeholder="Search commands...">
+		</div>
+	</header>
 
   <main>
-    <div class="commands-header">
-        <img src="Moodge.png" alt="Commands Icon" width="50">
+    <div class="commands-header-container">
+        <img src="Moodge.png" alt="Commands Icon">
         <h1>Commands</h1>
     </div>
-    <div class="command">
-      <strong>-levelinfo</strong>
-      <div class="command-description">Zeigt, wie viele Level es gibt und ab wann Prestige möglich ist.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-prestigeinfo</strong>
-      <div class="command-description">Listet alle Prestige-Symbole und erklärt den XP-Bonus pro Prestige.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-prestige</strong>
-      <div class="command-description">Setzt dich nach Level 15 auf Level 1 zurück, erhöht dein Prestige-Level und gibt dir dauerhaft mehr XP pro Aktion.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-m / -moodi</strong>
-      <div class="command-description">Moodi grinden, XP und Moodi verdienen (mit Streak- und Prestige-Bonus, 1h Cooldown).</div>
-    </div>
-    
-    <div class="command">
-      <strong>-case</strong>
-      <div class="command-description">Öffnet eine virtuelle CS:GO-Case für 150 Moodi. 60s Cooldown pro User.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-steal / -s</strong>
-      <div class="command-description">Versuche, einem zufälligen User Moodi zu stehlen.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-points</strong>
-      <div class="command-description">Zeigt deine (oder eines Users) Moodi, XP, Level, Prestige und Streak.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-stats</strong>
-      <div class="command-description">Zeigt detaillierte Stats (Moodi, XP, Level, Streak, letzter Moodi).</div>
-    </div>
-    
-    <div class="command">
-      <strong>-top</strong>
-      <div class="command-description">Zeigt die Top 5 User nach Moodi.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-toplevel</strong>
-      <div class="command-description">Zeigt die Top 5 User nach Level/XP.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-gamble <code>&lt;Betrag|all|half&gt;</code></strong>
-      <div class="command-description">Moodi setzen und mit Glück verdoppeln oder verlieren.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-daily</strong>
-      <div class="command-description">Täglicher Bonus (Moodi & XP, einmal pro Tag).</div>
-    </div>
-    
-    <div class="command">
-      <strong>-afk <code>[Grund]</code></strong>
-      <div class="command-description">Setzt dich auf AFK, optional mit Grund.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-gn <code>[Grund]</code></strong>
-      <div class="command-description">Setzt dich auf Schlafen, optional mit Grund.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-remind <code>&lt;nutzer&gt; &lt;nachricht&gt;</code></strong>
-      <div class="command-description">Speichert eine Nachricht für den Nutzer.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-help</strong>
-      <div class="command-description">Zeigt den Link zu allen Befehlen & Erklärungen.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-uptime</strong>
-      <div class="command-description">Zeigt die Stream-Uptime.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-twitter, -youtube, -discord</strong>
-      <div class="command-description">Zeigt Social-Links.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-cat</strong>
-      <div class="command-description">Zeigt ein Katzenbild.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-dog</strong>
-      <div class="command-description">Zeigt ein Hundebild.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-joke</strong>
-      <div class="command-description">Zufälliger Witz.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-8ball</strong>
-      <div class="command-description">Magische 8-Ball-Antwort.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-user / -u</strong>
-      <div class="command-description">Zeigt Twitch-Infos zu einem Nutzer.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-badge</strong>
-      <div class="command-description">Zeigt das 7TV-Badge eines Users.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-paint</strong>
-      <div class="command-description">Zeigt das 7TV-Paint eines Users.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-pfp</strong>
-      <div class="command-description">Zeigt das Twitch-Profilbild eines Users als Link im Chat.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-mlu</strong>
-      <div class="command-description">Zeigt dein MLU-Profil oder das eines anderen Users.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-vanity</strong>
-      <div class="command-description">Zeigt dein Vanity-Profil oder das eines anderen Users.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-id</strong>
-      <div class="command-description">Zeigt Twitch- und 7TV-ID.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-7tvu</strong>
-      <div class="command-description">Zeigt 7TV-Sub-Status.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-join</strong>
-      <div class="command-description">Bot joint einen Kanal.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-part</strong>
-      <div class="command-description">Bot verlässt einen Kanal.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-ping</strong>
-      <div class="command-description">Zeigt die Bot-Uptime.</div>
-    </div>
-    
-    <div class="command">
-      <strong>-owner</strong>
-      <div class="command-description">Zeigt den Bot-Owner.</div>
-    </div>
+    <div class="command"><strong>-levelinfo</strong><br>Zeigt, wie viele Level es gibt und ab wann Prestige möglich ist.</div>
+    <div class="command"><strong>-prestigeinfo</strong><br>Listet alle Prestige-Symbole und erklärt den XP-Bonus pro Prestige.</div>
+    <div class="command"><strong>-prestige</strong><br>Setzt dich nach Level 15 auf Level 1 zurück, erhöht dein Prestige-Level und gibt dir dauerhaft mehr XP pro Aktion.</div>
+    <div class="command"><strong>-m / -moodi</strong><br>Moodi grinden, XP und Moodi verdienen (mit Streak- und Prestige-Bonus, 1h Cooldown).</div>
+    <div class="command"><strong>-case</strong><br>Öffnet eine virtuelle CS:GO-Case für 150 Moodi. 60s Cooldown pro User.</div>
+    <div class="command"><strong>-steal / -s</strong><br>Versuche, einem zufälligen User Moodi zu stehlen.</div>
+    <div class="command"><strong>-points</strong><br>Zeigt deine (oder eines Users) Moodi, XP, Level, Prestige und Streak.</div>
+    <div class="command"><strong>-stats</strong><br>Zeigt detaillierte Stats (Moodi, XP, Level, Streak, letzter Moodi).</div>
+    <div class="command"><strong>-top</strong><br>Zeigt die Top 5 User nach Moodi.</div>
+    <div class="command"><strong>-toplevel</strong><br>Zeigt die Top 5 User nach Level/XP.</div>
+    <div class="command"><strong>-gamble <code>&lt;Betrag|all|half&gt;</code></strong><br>Moodi setzen und mit Glück verdoppeln oder verlieren.</div>
+    <div class="command"><strong>-daily</strong><br>Täglicher Bonus (Moodi & XP, einmal pro Tag).</div>
+    <div class="command"><strong>-afk <code>[Grund]</code></strong><br>Setzt dich auf AFK, optional mit Grund.</div>
+    <div class="command"><strong>-gn <code>[Grund]</code></strong><br>Setzt dich auf Schlafen, optional mit Grund.</div>
+    <div class="command"><strong>-remind <code>&lt;nutzer&gt; &lt;nachricht&gt;</code></strong><br>Speichert eine Nachricht für den Nutzer.</div>
+    <div class="command"><strong>-help</strong><br>Zeigt den Link zu allen Befehlen & Erklärungen.</div>
+    <div class="command"><strong>-uptime</strong><br>Zeigt die Stream-Uptime.</div>
+    <div class="command"><strong>-twitter, -youtube, -discord</strong><br>Zeigt Social-Links.</div>
+    <div class="command"><strong>-cat</strong><br>Zeigt ein Katzenbild.</div>
+    <div class="command"><strong>-dog</strong><br>Zeigt ein Hundebild.</div>
+    <div class="command"><strong>-joke</strong><br>Zufälliger Witz.</div>
+    <div class="command"><strong>-8ball</strong><br>Magische 8-Ball-Antwort.</div>
+    <div class="command"><strong>-user / -u</strong><br>Zeigt Twitch-Infos zu einem Nutzer.</div>
+    <div class="command"><strong>-badge</strong><br>Zeigt das 7TV-Badge eines Users.</div>
+    <div class="command"><strong>-paint</strong><br>Zeigt das 7TV-Paint eines Users.</div>
+    <div class="command"><strong>-pfp</strong><br>Zeigt das Twitch-Profilbild eines Users als Link im Chat.</div>
+    <div class="command"><strong>-mlu</strong><br>Zeigt dein MLU-Profil oder das eines anderen Users.</div>
+    <div class="command"><strong>-vanity</strong><br>Zeigt dein Vanity-Profil oder das eines anderen Users.</div>
+    <div class="command"><strong>-id</strong><br>Zeigt Twitch- und 7TV-ID.</div>
+    <div class="command"><strong>-7tvu</strong><br>Zeigt 7TV-Sub-Status.</div>
+    <div class="command"><strong>-join</strong><br>Bot joint einen Kanal.</div>
+    <div class="command"><strong>-part</strong><br>Bot verlässt einen Kanal.</div>
+    <div class="command"><strong>-ping</strong><br>Zeigt die Bot-Uptime.</div>
+    <div class="command"><strong>-owner</strong><br>Zeigt den Bot-Owner.</div>
   </main>
-
   <script>
-    const searchInput = document.getElementById('search');
-    const commands = document.querySelectorAll('.command');
+  const searchInput = document.getElementById('search');
+  const commands = document.querySelectorAll('.command');
 
-    // Search functionality
-    searchInput.addEventListener('input', () => {
-      const query = searchInput.value.toLowerCase();
-      commands.forEach(cmd => {
-        cmd.classList.toggle('hidden', !cmd.textContent.toLowerCase().includes(query));
-      });
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+    commands.forEach(cmd => {
+      cmd.classList.toggle('hidden', !cmd.textContent.toLowerCase().includes(query));
     });
-
-    // Mouse tracking for commands
-    commands.forEach(command => {
-      command.addEventListener('mousemove', (e) => {
-        const rect = command.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        command.style.setProperty('--x', `${x}%`);
-      });
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
