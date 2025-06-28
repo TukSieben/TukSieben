@@ -41,14 +41,15 @@
 
     async function main() {
       const params = getHashParams();
+      document.getElementById('status').innerHTML = '<b>Debug:</b> URL = ' + window.location.href + '<br>Params: ' + JSON.stringify(params);
       if (!params.access_token) {
-        document.getElementById('status').innerText = 'Fehler: Kein Zugriffstoken erhalten.';
+        document.getElementById('status').innerHTML += '<br><span style="color:red">Fehler: Kein Zugriffstoken erhalten.</span>';
         return;
       }
       // Username holen
       const user = await fetchTwitchUser(params.access_token);
       if (!user) {
-        document.getElementById('status').innerText = 'Fehler: Twitch-User konnte nicht geladen werden.';
+        document.getElementById('status').innerHTML += '<br><span style="color:red">Fehler: Twitch-User konnte nicht geladen werden.</span>';
         return;
       }
       // Username an Server senden
@@ -59,12 +60,13 @@
           body: 'username=' + encodeURIComponent(user.login)
         });
         if (resp.ok) {
-          document.getElementById('status').innerHTML = 'Erfolg! MoodgeBot wird deinem Channel beitreten.<br>Du kannst dieses Fenster schließen.';
+          document.getElementById('status').innerHTML += '<br>Erfolg! MoodgeBot wird deinem Channel beitreten.<br>Du kannst dieses Fenster schließen.';
         } else {
-          document.getElementById('status').innerText = 'Fehler beim Senden an den Server.';
+          const text = await resp.text();
+          document.getElementById('status').innerHTML += '<br><span style="color:red">Fehler beim Senden an den Server: ' + text + '</span>';
         }
       } catch (e) {
-        document.getElementById('status').innerText = 'Netzwerkfehler.';
+        document.getElementById('status').innerHTML += '<br><span style="color:red">Netzwerkfehler: ' + e + '</span>';
       }
     }
     main();
