@@ -42,6 +42,19 @@
       border-bottom: 1px solid rgba(122, 255, 122, 0.1);
     }
 
+    /* NEU: Flex-Container für Logo-Bild und Text */
+    .logo-container {
+        display: flex;
+        align-items: center; /* Vertikale Zentrierung */
+        gap: 10px; /* Abstand zwischen Bild und Text */
+    }
+
+    .logo-img {
+        width: 50px; /* Breite des Logos Bildes */
+        height: auto; /* Höhe automatisch anpassen */
+        vertical-align: middle; /* Optional: Für bessere Ausrichtung, falls nicht Flexbox */
+    }
+
     .logo {
       font-size: 1.8rem;
       font-weight: 700;
@@ -103,10 +116,27 @@
       backdrop-filter: blur(2px);
     }
 
+    /* NEU: Flex-Container für Commands-Bild und H1 */
+    .commands-header {
+        display: flex;
+        align-items: center; /* Vertikale Zentrierung */
+        justify-content: center; /* Horizontale Zentrierung */
+        gap: 10px; /* Abstand zwischen Bild und Text */
+        margin-bottom: 2rem; /* Behält den ursprünglichen Abstand zum nächsten Element bei */
+        margin-top: -20px; /* Schiebt den gesamten Bereich 20px nach oben. Passe den Wert an! */
+        /* width: fit-content; */ /* Nicht notwendig, da justify-content: center das erledigt */
+    }
+
+    .commands-header img {
+        width: 50px; /* Breite des Bildes */
+        height: auto; /* Höhe automatisch anpassen */
+        vertical-align: middle; /* Optional: Für bessere Ausrichtung */
+    }
+
     h1 {
-      text-align: center;
+      /* text-align: center; */ /* Nicht mehr nötig, da der Flex-Container zentriert */
       font-size: 2.2rem;
-      margin-bottom: 2rem;
+      margin: 0; /* Wichtig: Entfernt den Standard-Margin des h1, wenn es in einem Flex-Container ist */
       color: #7aff7a;
       text-shadow: 0 0 12px rgba(59, 255, 134, 0.7);
       font-weight: 700;
@@ -310,15 +340,20 @@
   <div id="bg-faden"></div>
   
   <header>
-    <div class="logo">MoodgeBot</div>
+    <div class="logo-container">
+        <img src="Moodge.png" alt="MoodgeBot Logo" class="logo-img">
+        <div class="logo">MoodgeBot</div>
+    </div>
     <div class="search-container">
       <input type="text" id="search" placeholder="Search commands...">
     </div>
   </header>
 
   <main>
-    <h1>Commands</h1>
-
+    <div class="commands-header">
+        <img src="Moodge.png" alt="Commands Icon" width="50">
+        <h1>Commands</h1>
+    </div>
     <div class="command">
       <strong>-levelinfo</strong>
       <div class="command-description">Zeigt, wie viele Level es gibt und ab wann Prestige möglich ist.</div>
@@ -509,7 +544,6 @@
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
         command.style.setProperty('--x', `${x}%`);
-        command.style.setProperty('--y', `${y}%`);
       });
     });
   </script>
