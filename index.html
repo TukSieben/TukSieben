@@ -397,6 +397,9 @@
       <div class="cta-container">
         <a class="cta" href="https://github.com/TukSieben/TukSieben" target="_blank">Jetzt starten ⚡</a>
       </div>
+      <div class="cta-container">
+        <button id="twitch-login" class="cta" style="margin-top: 1rem; background: linear-gradient(135deg, #6441a5, #9147ff);">Twitch Bot zu meinem Channel hinzufügen</button>
+      </div>
     </section>
 
     <section class="stats">
@@ -460,6 +463,20 @@
   </main>
 
   <script>
+    // Twitch OAuth Login
+    document.addEventListener('DOMContentLoaded', () => {
+      const twitchLoginBtn = document.getElementById('twitch-login');
+      if (twitchLoginBtn) {
+        twitchLoginBtn.addEventListener('click', () => {
+          const clientId = 'f1o3avzavsj9pniy3fji0rl7fy41q4';
+          const redirectUri = encodeURIComponent('https://moodge.de/redirect');
+          const scope = encodeURIComponent('chat:read chat:edit user:read:email');
+          const state = Math.random().toString(36).substring(2);
+          const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&state=${state}`;
+          window.location.href = twitchAuthUrl;
+        });
+      }
+    });
     // Animated Background Particles
     function createParticles() {
       const container = document.getElementById('bg-container');
