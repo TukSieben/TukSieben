@@ -503,12 +503,10 @@
       <p>Alles was du für deinen Stream brauchst</p>
     </div>
 
-    <!-- Search Results Section -->
     <div class="search-results" id="search-results">
       <div class="search-results-header">Suchergebnisse:</div>
       <div class="search-results-grid" id="search-results-grid">
-        <!-- Search results will be populated here -->
-      </div>
+        </div>
     </div>
 
     <div class="category-header">🎮 Level & Prestige System</div>
@@ -792,4 +790,113 @@
         // Clear and populate search results
         searchResultsGrid.innerHTML = '';
         
-        commands.forEach((cmd, index) => {
+        // Ensure search results container is active
+        searchResults.classList.add('active');
+
+        // Get the current search query
+        const currentQuery = searchInput.value.toLowerCase().replace(/^-/, '');
+
+        // Separate exact matches from other matches
+        const exactMatches = [];
+        const otherMatches = [];
+
+        commands.forEach((cmd) => {
+            const commandName = cmd.element.querySelector('strong').textContent.toLowerCase().replace(/^-/, '');
+            if (commandName === currentQuery) {
+                exactMatches.push(cmd);
+            } else {
+                otherMatches.push(cmd);
+            }
+        });
+
+        // First, append exact matches (they will be at the very top)
+        exactMatches.forEach((cmd, index) => {
+            const clonedCommand = cmd.element.cloneNode(true);
+            clonedCommand.classList.remove('hidden'); // Ensure it's visible
+            clonedCommand.style.animationDelay = `${index * 0.05}s`; // Staggered animation
+            searchResultsGrid.appendChild(clonedCommand);
+        });
+
+        // Then, append other matches
+        otherMatches.forEach((cmd, index) => {
+            const clonedCommand = cmd.element.cloneNode(true);
+            clonedCommand.classList.remove('hidden'); // Ensure it's visible
+            // Adjust index for animation delay to continue smoothly after exact matches
+            clonedCommand.style.animationDelay = `${(exactMatches.length + index) * 0.05}s`; 
+            searchResultsGrid.appendChild(clonedCommand);
+        });
+      }
+      
+      function showNoResults() {
+        // Hide original layout
+        categories.forEach(cat => cat.style.display = 'none');
+        commandGrids.forEach(grid => grid.style.display = 'none');
+        
+        // Show search results container
+        searchResults.classList.add('active');
+        searchResultsGrid.innerHTML = '<p style="text-align: center; color: rgba(255, 255, 255, 0.7); font-style: italic;">Keine Ergebnisse gefunden.</p>';
+      }
+      
+      function showOriginalLayout() {
+        searchResults.classList.remove('active');
+        categories.forEach(cat => cat.style.display = 'block'); // Or original display value
+        commandGrids.forEach(grid => grid.style.display = 'grid'); // Or original display value
+        
+        // Reset commands visibility and animation delay
+        allCommands.forEach((command, index) => {
+          command.classList.remove('hidden');
+          command.style.opacity = '0'; // Reset opacity for re-animation
+          command.style.transform = 'translateY(30px)'; // Reset transform for re-animation
+          command.style.animationDelay = `${0.1 + (index * 0.05)}s`; // Reapply original staggered delay
+          command.style.animation = 'none'; // Temporarily disable to reset
+          void command.offsetWidth; // Trigger reflow
+          command.style.animation = 'slideInUp 0.6s ease forwards'; // Reapply animation
+        });
+      }
+      
+      // Event listener for search input
+      searchInput.addEventListener('input', (event) => {
+        performSearch(event.target.value);
+      });
+
+      // Clear search and show original layout when back button is clicked
+      document.querySelector('.back-btn').addEventListener('click', () => {
+        searchInput.value = ''; // Clear search input
+        showOriginalLayout();
+      });
+    }
+
+    // Scroll indicator functionality
+    function setupScrollIndicator() {
+      const scrollIndicator = document.querySelector('.scroll-indicator');
+      
+      document.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (scrollTop / scrollHeight) * 100;
+        scrollIndicator.style.transform = `scaleX(${scrolled / 100})`;
+      });
+    }
+
+    // Navigation scroll effect
+    function setupNavScrollEffect() {
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      });
+    }
+
+    // Initialize all functionalities when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      setupSearchFunctionality();
+      setupScrollIndicator();
+      setupNavScrollEffect();
+    });
+  </script>
+</body>
+</html>
