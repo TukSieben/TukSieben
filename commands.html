@@ -24,11 +24,13 @@
     color: #f0f0f0;
     font-size: 1rem;
     outline: none;
+    transition: all 0.3s ease;
   }
 
   .search-container input:focus {
     border-color: #4caf50;
-    box-shadow: 0 0 5px #4caf50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+    transform: scale(1.02);
   }
 
   .hidden {
@@ -58,6 +60,14 @@
       font-size: 1.5rem;
       font-weight: bold;
       color: #4caf50;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .logo:hover {
+      color: #66bb6a;
+      text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+      transform: scale(1.05);
     }
 
     main {
@@ -70,6 +80,7 @@
       text-align: center;
       color: #4caf50;
       margin-bottom: 2rem;
+      text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
     }
 
     .command {
@@ -78,10 +89,48 @@
       padding: 1rem;
       margin-bottom: 1rem;
       border-radius: 6px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .command::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .command:hover {
+      background-color: #222;
+      border-left-color: #66bb6a;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(76, 175, 80, 0.1);
+    }
+
+    .command:hover::before {
+      left: 100%;
+    }
+
+    .command:active {
+      transform: translateY(0) scale(1);
     }
 
     .command strong {
       color: #ffffff;
+      transition: color 0.3s ease;
+    }
+
+    .command:hover strong {
+      color: #66bb6a;
+      text-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
     }
 
     .command code {
@@ -90,6 +139,71 @@
       border-radius: 4px;
       color: #4caf50;
       font-family: monospace;
+      transition: all 0.3s ease;
+    }
+
+    .command:hover code {
+      background-color: #333;
+      color: #66bb6a;
+      box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+    }
+
+    /* Zusätzliche Animation für die Command-Liste */
+    .command:nth-child(odd):hover {
+      border-left-width: 8px;
+    }
+
+    .command:nth-child(even):hover {
+      border-left-width: 8px;
+      border-left-color: #81c784;
+    }
+
+    /* Smooth Scroll Animation beim Laden */
+    .command {
+      opacity: 0;
+      animation: slideInUp 0.6s ease forwards;
+    }
+
+    .command:nth-child(1) { animation-delay: 0.1s; }
+    .command:nth-child(2) { animation-delay: 0.15s; }
+    .command:nth-child(3) { animation-delay: 0.2s; }
+    .command:nth-child(4) { animation-delay: 0.25s; }
+    .command:nth-child(5) { animation-delay: 0.3s; }
+    .command:nth-child(6) { animation-delay: 0.35s; }
+    .command:nth-child(7) { animation-delay: 0.4s; }
+    .command:nth-child(8) { animation-delay: 0.45s; }
+    .command:nth-child(9) { animation-delay: 0.5s; }
+    .command:nth-child(10) { animation-delay: 0.55s; }
+    .command:nth-child(n+11) { animation-delay: 0.6s; }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      main {
+        padding: 1rem;
+      }
+      
+      .search-container {
+        margin: 0 1rem;
+      }
+      
+      header {
+        padding: 1rem;
+      }
+      
+      .command:hover {
+        transform: translateY(-1px) scale(1.01);
+      }
     }
   </style>
 </head>
