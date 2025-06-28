@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>MoodgeBot Twitch Redirect</title>
+  <style>
+    body { background: #0a0a0f; color: #fff; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .box { background: rgba(255,255,255,0.05); padding: 2rem 3rem; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
+    .loader { border: 4px solid #c77dff; border-top: 4px solid #9d4edd; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 2rem auto; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Login wird verarbeitet ...</h2>
+    <div class="loader"></div>
+    <div id="status"></div>
+  </div>
+  <script>
+    // Extrahiere Token aus URL-Fragment
+    function getHashParams() {
+      const hash = window.location.hash.substr(1);
+      return hash.split('&').reduce(function (result, item) {
+        const parts = item.split('=');
+        result[parts[0]] = decodeURIComponent(parts[1]);
+        return result;
+      }, {});
+    }
 
+    async function fetchTwitchUser(token) {
+      const res = await fetch('https://api.twitch.tv/helix/users', {
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Client-ID': 'f1o3avzavsj9pniy3fji0rl7fy41q4'
+        }
+      });
+      const data = await res.json();
+      return data.data && data.data[0] ? data.data[0] : null;
+    }
+
+    async function main() {
+      const params = getHashParams();
+      if (!params.access_token) {
+        document.getElementById('status').innerText = 'Fehler: Kein Zugriffstoken erhalten.';
+        return;
+      }
+      // Username holen
+      const user = await fetchTwitchUser(params.access_token);
+      if (!user) {
+        document.getElementById('status').innerText = 'Fehler: Twitch-User konnte nicht geladen werden.';
+        return;
+      }
+      // Username an Server senden
+      try {
+        const resp = await fetch('/api.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'username=' + encodeURIComponent(user.login)
+        });
+        if (resp.ok) {
+          document.getElementById('status').innerHTML = 'Erfolg! MoodgeBot wird deinem Channel beitreten.<br>Du kannst dieses Fenster schließen.';
+        } else {
+          document.getElementById('status').innerText = 'Fehler beim Senden an den Server.';
+        }
+      } catch (e) {
+        document.getElementById('status').innerText = 'Netzwerkfehler.';
+      }
+    }
+    main();
+  </script>
+</body>
+</html>
