@@ -387,6 +387,9 @@
   </nav>
 
   <main>
+    <div id="join-info" style="display:none;color:#9d4edd;text-align:center;margin-bottom:2em;font-size:1.2em;font-weight:600;">
+      Der Bot wird gleich deinem Chat beitreten!
+    </div>
     <section class="hero">
       <h1>MoodgeBot</h1>
       <p class="subtitle">Der ultimative Twitch Bot für deinen Stream</p>
@@ -463,6 +466,13 @@
   </main>
 
   <script>
+    // Zeige Info nach Redirect, falls joined=1 in der URL
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.search.includes('joined=1')) {
+        var info = document.getElementById('join-info');
+        if (info) info.style.display = 'block';
+      }
+    });
     // Twitch OAuth Login
     document.addEventListener('DOMContentLoaded', () => {
       const twitchLoginBtn = document.getElementById('twitch-login');
