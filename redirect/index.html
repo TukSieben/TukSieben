@@ -41,15 +41,21 @@
 
     async function main() {
       const params = getHashParams();
-      document.getElementById('status').innerHTML = '<b>Debug:</b> URL = ' + window.location.href + '<br>Params: ' + JSON.stringify(params);
+      let debugMsg = '';
+      debugMsg += '\nURL: ' + window.location.href;
+      debugMsg += '\nParams: ' + JSON.stringify(params);
       if (!params.access_token) {
-        document.getElementById('status').innerHTML += '<br><span style="color:red">Fehler: Kein Zugriffstoken erhalten.</span>';
+        debugMsg += '\nFehler: Kein Zugriffstoken erhalten.';
+        alert(debugMsg);
+        document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         return;
       }
       // Username holen
       const user = await fetchTwitchUser(params.access_token);
       if (!user) {
-        document.getElementById('status').innerHTML += '<br><span style="color:red">Fehler: Twitch-User konnte nicht geladen werden.</span>';
+        debugMsg += '\nFehler: Twitch-User konnte nicht geladen werden.';
+        alert(debugMsg);
+        document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         return;
       }
       // Username an Server senden
@@ -60,13 +66,19 @@
           body: 'username=' + encodeURIComponent(user.login)
         });
         if (resp.ok) {
-          document.getElementById('status').innerHTML += '<br>Erfolg! MoodgeBot wird deinem Channel beitreten.<br>Du kannst dieses Fenster schließen.';
+          debugMsg += '\nErfolg! MoodgeBot wird deinem Channel beitreten.';
+          alert(debugMsg);
+          document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         } else {
           const text = await resp.text();
-          document.getElementById('status').innerHTML += '<br><span style="color:red">Fehler beim Senden an den Server: ' + text + '</span>';
+          debugMsg += '\nFehler beim Senden an den Server: ' + text;
+          alert(debugMsg);
+          document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         }
       } catch (e) {
-        document.getElementById('status').innerHTML += '<br><span style="color:red">Netzwerkfehler: ' + e + '</span>';
+        debugMsg += '\nNetzwerkfehler: ' + e;
+        alert(debugMsg);
+        document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
       }
     }
     main();
