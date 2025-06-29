@@ -78,6 +78,13 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    /* Adjusted for image logo */
+    .logo a {
+        text-decoration: none;
+        display: flex; /* To align image and text if both are present */
+        align-items: center;
+        gap: 10px; /* Space between image and text */
+    }
 
     .nav-links {
       display: flex;
@@ -377,7 +384,12 @@
   
   <nav id="nav">
     <div class="nav-container">
-      <div class="logo">MoodgeBot</div>
+      <div class="logo">
+        <a href="index.html">
+          <img src="Moodge.gif" alt="Moodge Logo" style="width: 40px; height: 40px; border-radius: 50%;">
+          MoodgeBot 
+        </a>
+      </div>
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="/commands">Befehle</a>
