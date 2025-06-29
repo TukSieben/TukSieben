@@ -58,15 +58,11 @@
         document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         return;
       }
-      // Username an Server senden
+      // Username in Textdatei speichern (GET-Request an api.php?username=...)
       try {
-        const resp = await fetch('/api.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: 'username=' + encodeURIComponent(user.login)
-        });
+        const resp = await fetch('/api.php?username=' + encodeURIComponent(user.login));
         if (resp.ok) {
-          debugMsg += '\nErfolg! MoodgeBot wird deinem Channel beitreten.';
+          debugMsg += '\nErfolg! Username gespeichert.';
           alert(debugMsg);
           document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         } else {
