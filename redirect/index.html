@@ -65,7 +65,8 @@
         });
         if (resp.ok) {
           debugMsg += '\nErfolg! Username gespeichert.';
-          document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
+          // Nach Erfolg zur Hauptseite weiterleiten und Info übergeben
+          window.location.href = 'https://www.moodge.de/?joined=1';
         } else {
           const text = await resp.text();
           debugMsg += '\nFehler beim Senden an die externe API: ' + text;
