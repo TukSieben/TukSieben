@@ -46,7 +46,6 @@
       debugMsg += '\nParams: ' + JSON.stringify(params);
       if (!params.access_token) {
         debugMsg += '\nFehler: Kein Zugriffstoken erhalten.';
-        alert(debugMsg);
         document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         return;
       }
@@ -54,7 +53,6 @@
       const user = await fetchTwitchUser(params.access_token);
       if (!user) {
         debugMsg += '\nFehler: Twitch-User konnte nicht geladen werden.';
-        alert(debugMsg);
         document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         return;
       }
@@ -67,17 +65,14 @@
         });
         if (resp.ok) {
           debugMsg += '\nErfolg! Username gespeichert.';
-          alert(debugMsg);
           document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         } else {
           const text = await resp.text();
           debugMsg += '\nFehler beim Senden an die externe API: ' + text;
-          alert(debugMsg);
           document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         }
       } catch (e) {
         debugMsg += '\nNetzwerkfehler: ' + e;
-        alert(debugMsg);
         document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
       }
     }
