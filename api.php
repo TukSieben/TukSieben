@@ -12,47 +12,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // Speicherort für Usernamen
 $file = __DIR__ . '/twitch_users.txt';
 
-// POST: Username speichern oder part
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Bot join
-    if (isset($_POST['username'])) {
-        $username = trim($_POST['username']);
-        if ($username !== '') {
-            file_put_contents($file, $username . "\n", FILE_APPEND | LOCK_EX);
-            http_response_code(200);
-            echo 'OK';
-            exit;
-        } else {
-            http_response_code(400);
-            echo 'No username';
-            exit;
-        }
-    }
-    // Bot part
-    if (isset($_POST['part'])) {
-        $partUser = trim($_POST['part']);
-        if ($partUser !== '' && file_exists($file)) {
-            $users = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-            $users = array_filter($users, function($u) use ($partUser) {
-                return strtolower($u) !== strtolower($partUser);
-            });
-            file_put_contents($file, implode("\n", $users) . (count($users) ? "\n" : ''));
-            http_response_code(200);
-            echo 'PART OK';
-            exit;
-        } else {
-            http_response_code(400);
-            echo 'No part username';
-            exit;
-        }
+// Username speichern per GET (z.B. /api.php?username=foo)
+if (isset($_GET['username'])) {
+    $username = trim($_GET['username']);
+    if ($username !== '') {
+        file_put_contents($file, $username . "\n", FILE_APPEND | LOCK_EX);
+        http_response_code(200);
+        echo 'OK';
+        exit;
+    } else {
+        http_response_code(400);
+        echo 'No username';
+        exit;
     }
 }
 
-// GET: Usernamen abrufen und Datei leeren
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+// GET: Usernamen abrufen (ohne Datei zu leeren)
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && !isset($_GET['username'])) {
     if (file_exists($file)) {
         $users = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        file_put_contents($file, ''); // Datei leeren
         header('Content-Type: application/json');
         echo json_encode($users);
         exit;
