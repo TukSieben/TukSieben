@@ -58,16 +58,20 @@
         document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         return;
       }
-      // Username in Textdatei speichern (GET-Request an api.php?username=...)
+      // Username an externe API senden
       try {
-        const resp = await fetch('/api.php?username=' + encodeURIComponent(user.login));
+        const resp = await fetch('https://ddrx.at/moodgebot/upload.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: user.login })
+        });
         if (resp.ok) {
           debugMsg += '\nErfolg! Username gespeichert.';
           alert(debugMsg);
           document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         } else {
           const text = await resp.text();
-          debugMsg += '\nFehler beim Senden an den Server: ' + text;
+          debugMsg += '\nFehler beim Senden an die externe API: ' + text;
           alert(debugMsg);
           document.getElementById('status').innerText = debugMsg.replace(/\n/g, '\n');
         }
