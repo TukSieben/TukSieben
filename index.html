@@ -717,3 +717,115 @@
             <span class="chat-timestamp">19:34</span>
             <span class="chat-username mod">MoodgeBot:</span>
             <span class="chat-text chat-bot-message">@StreamLover Du bist Level 5 mit 1,337 XP! 🎮</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:35</span>
+            <span class="chat-username viewer">0PZI:</span>
+            <span class="chat-text">-gamble 100</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:35</span>
+            <span class="chat-username mod">MoodgeBot:</span>
+            <span class="chat-text chat-bot-message">🎲 @0PZI hat 200 Moodi gewonnen! Glückwunsch! 💰</span>
+          </div>
+        </div>
+        
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" placeholder="Nachricht senden..." disabled>
+          <button class="chat-send-btn" disabled>Chat</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <h2>Krasse Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎮</div>
+          <h3>Leveling & Prestige System</h3>
+          <p>Sammle Level und Prestige für dauerhafte XP-Boni. Zeig deiner Community, wer die Nummer 1 ist!</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Moodi & XP Grinden</h3>
+          <p>Verdiene Moodi und XP mit Chat-Aktionen und Streaks. Je aktiver, desto reicher wirst du!</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎲</div>
+          <h3>Gambling System</h3>
+          <p>Setze deine Moodi und versuche, deinen Einsatz zu verdoppeln. All in oder nichts!</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3>Leaderboards</h3>
+          <p>Konkuriere mit anderen Chattern und klettere an die Spitze der Ranglisten!</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔥</div>
+          <h3>Chat Moderation</h3>
+          <p>Automatische Moderation, die deinen Chat sauber und freundlich hält.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Blitzschnell</h3>
+          <p>Ultraschnelle Reaktionszeiten für die beste User Experience deiner Community.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Bereit für das nächste Level? <a href="https://twitch.tv/moodgebot" target="_blank">MoodgeBot auf Twitch besuchen</a></p>
+    </footer>
+  </main>
+
+  <script>
+    // Zeige Info nach Redirect, falls joined=1 in der URL
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.location.search.includes('joined=1')) {
+        var info = document.getElementById('join-info');
+        if (info) info.style.display = 'block';
+      }
+    });
+      
+    // Animated Background Particles
+    function createParticles() {
+      const container = document.getElementById('bg-container');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = Math.random() * 4 + 1;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (Math.random() * 3 + 6) + 's';
+        
+        container.appendChild(particle);
+      }
+    }
+
+    // Navbar scroll effect
+    function handleNavScroll() {
+      const nav = document.getElementById('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+
+    // Scroll progress indicator
+    function updateScrollProgress() {
+      const indicator = document.querySelector('.scroll-indicator');
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      indicator.style.transform = `scaleX(${scrolled / 100})`;
+    }
+
+    // Initialize everything
+    document.
