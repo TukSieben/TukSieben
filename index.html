@@ -476,21 +476,7 @@
         var info = document.getElementById('join-info');
         if (info) info.style.display = 'block';
       }
-    });
-    // Twitch OAuth Login
-    document.addEventListener('DOMContentLoaded', () => {
-      const twitchLoginBtn = document.getElementById('twitch-login');
-      if (twitchLoginBtn) {
-        twitchLoginBtn.addEventListener('click', () => {
-          const clientId = 'f1o3avzavsj9pniy3fji0rl7fy41q4';
-          const redirectUri = encodeURIComponent('https://moodge.de/redirect');
-          const scope = encodeURIComponent('chat:read chat:edit user:read:email');
-          const state = Math.random().toString(36).substring(2);
-          const twitchAuthUrl = `https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&state=${state}`;
-          window.location.href = twitchAuthUrl;
-        });
-      }
-    });
+      
     // Animated Background Particles
     function createParticles() {
       const container = document.getElementById('bg-container');
