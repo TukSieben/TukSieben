@@ -215,10 +215,11 @@
       font-weight: 900;
       margin-bottom: 1rem;
       background: linear-gradient(135deg, var(--text-primary) 0%, var(--green-primary) 50%, var(--green-secondary) 100%);
+      background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: headerGlow 3s ease-in-out infinite alternate;
+      animation: headerGlow 3s ease-in-out infinite alternate, gradientShift 4s ease-in-out infinite;
       line-height: 1.1;
       letter-spacing: -0.02em;
     }
@@ -226,6 +227,12 @@
     @keyframes headerGlow {
       from { filter: drop-shadow(0 0 20px var(--green-glow)); }
       to { filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.6)); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .subtitle {
@@ -258,69 +265,146 @@
       }
     }
 
-    /* Stats Section */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
+    /* Chat Section */
+    .chat-section {
       margin: 4rem 0;
       animation: fadeInUp 1s ease-out 1.5s both;
     }
 
-    .stat-card {
+    .chat-header {
       text-align: center;
-      padding: 2rem;
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid var(--border-secondary);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+      margin-bottom: 2rem;
     }
 
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--green-primary), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      background: rgba(20, 26, 21, 0.8);
-      border-color: var(--green-primary);
-      box-shadow: var(--shadow-green);
-    }
-
-    .stat-card:hover::before {
-      opacity: 1;
-    }
-
-    .stat-number {
-      font-size: 3rem;
-      font-weight: 900;
-      background: linear-gradient(45deg, var(--green-primary), var(--green-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .chat-instructions {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--green-primary);
       margin-bottom: 0.5rem;
-      filter: drop-shadow(0 0 15px var(--green-glow));
+      text-shadow: 0 0 15px var(--green-glow);
     }
 
-    .stat-label {
-      opacity: 0.8;
-      font-weight: 500;
+    .chat-subtitle {
       color: var(--text-secondary);
+      font-size: 1rem;
+      opacity: 0.8;
     }
 
-    .stat-card:hover .stat-label {
-      color: var(--text-primary);
+    .twitch-chat {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #18181b;
+      border-radius: 12px;
+      border: 2px solid var(--border-primary);
+      box-shadow: var(--shadow-green);
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .chat-header-bar {
+      background: #1f1f23;
+      padding: 12px 16px;
+      border-bottom: 1px solid #2f2f35;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green-primary);
+      box-shadow: 0 0 8px var(--green-glow);
+    }
+
+    .chat-title {
+      color: #efeff1;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .chat-messages {
+      padding: 16px;
+      background: #18181b;
+      min-height: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .chat-message {
+      margin-bottom: 8px;
+      line-height: 1.4;
+      font-size: 13px;
+    }
+
+    .chat-timestamp {
+      color: #adadb8;
+      font-size: 11px;
+      margin-right: 8px;
+    }
+
+    .chat-username {
+      font-weight: 600;
+      margin-right: 4px;
+    }
+
+    .chat-username.streamer { color: #ff6905; }
+    .chat-username.mod { color: #00ad03; }
+    .chat-username.vip { color: #e005b9; }
+    .chat-username.viewer { color: #8a2be2; }
+    .chat-username.viewer2 { color: #1e90ff; }
+    .chat-username.viewer3 { color: #ff69b4; }
+    .chat-username.viewer4 { color: #00ced1; }
+
+    .chat-text {
+      color: #efeff1;
+    }
+
+    .chat-bot-message {
+      color: var(--green-primary);
+      font-weight: 500;
+    }
+
+    .chat-input-area {
+      border-top: 1px solid #2f2f35;
+      padding: 12px 16px;
+      background: #1f1f23;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-input {
+      flex: 1;
+      background: #464649;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: #efeff1;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .chat-input::placeholder {
+      color: #adadb8;
+    }
+
+    .chat-send-btn {
+      background: var(--green-primary);
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      color: #000;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chat-send-btn:hover {
+      background: var(--green-secondary);
+      transform: scale(1.05);
     }
 
     /* Features Section */
@@ -505,8 +589,8 @@
         grid-template-columns: 1fr;
       }
       
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
+      .twitch-chat {
+        margin: 0 1rem;
       }
 
       .header-logo-section {
@@ -524,12 +608,17 @@
     }
 
     @media (max-width: 600px) {
-      .stats {
-        grid-template-columns: 1fr;
-      }
-      
       .feature-card {
         padding: 1.5rem;
+      }
+      
+      .twitch-chat {
+        margin: 0;
+      }
+      
+      .chat-messages {
+        min-height: 250px;
+        max-height: 300px;
       }
     }
 
@@ -579,22 +668,75 @@
       </p>
     </section>
         
-    <section class="stats">
-      <div class="stat-card">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Kostenlos</div>
+    <section class="chat-section">
+      <div class="chat-header">
+        <div class="chat-instructions">-join -part in den chat</div>
+        <div class="chat-subtitle">Füge MoodgeBot zu deinem Chat hinzu</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-number">∞</div>
-        <div class="stat-label">Möglichkeiten</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">24/7</div>
-        <div class="stat-label">Online</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">Open</div>
-        <div class="stat-label">Source</div>
+      
+      <div class="twitch-chat">
+        <div class="chat-header-bar">
+          <div class="chat-dot"></div>
+          <div class="chat-title">Stream Chat</div>
+        </div>
+        
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-message">
+            <span class="chat-timestamp">19:32</span>
+            <span class="chat-username streamer">TukSieben:</span>
+            <span class="chat-text">Hey Chat! Wie geht's euch?</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:32</span>
+            <span class="chat-username viewer">xXGamerXx:</span>
+            <span class="chat-text">Servus! Läuft bei dir!</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:33</span>
+            <span class="chat-username viewer2">ChatMaster99:</span>
+            <span class="chat-text">Was zockst du heute?</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:33</span>
+            <span class="chat-username streamer">TukSieben:</span>
+            <span class="chat-text">-join</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:33</span>
+            <span class="chat-username mod">MoodgeBot:</span>
+            <span class="chat-text chat-bot-message">✅ Erfolgreich dem Chat beigetreten! Verwende !help für alle Befehle.</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:34</span>
+            <span class="chat-username viewer3">ArschFiki:</span>
+            <span class="chat-text">Moodge!</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:34</span>
+            <span class="chat-username viewer4">StreamLover:</span>
+            <span class="chat-text">-stats</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:34</span>
+            <span class="chat-username mod">MoodgeBot:</span>
+            <span class="chat-text chat-bot-message">@StreamLover Du bist Level 5 mit 1,337 XP! 🎮</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:35</span>
+            <span class="chat-username viewer">xXGamerXx:</span>
+            <span class="chat-text">-gamble 100</span>
+          </div>
+          <div class="chat-message">
+            <span class="chat-timestamp">19:35</span>
+            <span class="chat-username mod">MoodgeBot:</span>
+            <span class="chat-text chat-bot-message">🎲 @xXGamerXx hat 200 Moodi gewonnen! Glückwunsch! 💰</span>
+          </div>
+        </div>
+        
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" placeholder="Nachricht senden..." disabled>
+          <button class="chat-send-btn" disabled>Chat</button>
+        </div>
       </div>
     </section>
 
@@ -684,94 +826,4 @@
       const indicator = document.querySelector('.scroll-indicator');
       const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height);
-      indicator.style.transform = `scaleX(${scrolled})`;
-    }
-
-    // Intersection Observer for animations
-    function setupScrollAnimations() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-          }
-        });
-      }, { threshold: 0.1 });
-
-      // Observe feature cards
-      document.querySelectorAll('.feature-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'all 0.6s ease';
-        observer.observe(card);
-      });
-
-      // Observe stat cards
-      document.querySelectorAll('.stat-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'all 0.6s ease';
-        observer.observe(card);
-      });
-    }
-
-    // Smooth scrolling for anchor links
-    function setupSmoothScrolling() {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
-      });
-    }
-
-    // Mouse movement parallax effect
-    function setupParallax() {
-      document.addEventListener('mousemove', (e) => {
-        const particles = document.querySelectorAll('.particle');
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        
-        particles.forEach((particle, index) => {
-          const speed = (index % 3 + 1) * 0.5;
-          const xPos = (x - 0.5) * speed;
-          const yPos = (y - 0.5) * speed;
-          
-          particle.style.transform += ` translate(${xPos}px, ${yPos}px)`;
-        });
-      });
-    }
-
-    // Initialize everything
-    document.addEventListener('DOMContentLoaded', () => {
-      createParticles();
-      setupScrollAnimations();
-      setupSmoothScrolling();
-      setupParallax();
-      
-      window.addEventListener('scroll', () => {
-        handleNavScroll();
-        updateScrollProgress();
-      });
-    });
-
-    // Add some extra interactive effects
-    document.querySelectorAll('.feature-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.style.transform += ' scale(1.02)';
-      });
-      
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = card.style.transform.replace(' scale(1.02)', '');
-      });
-    });
-  </script>
-</body>
-</html>
+      const scrolled = (winScroll
