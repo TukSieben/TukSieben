@@ -609,7 +609,7 @@
     </div>
 
     <div class="category-header">🎮 Level & Prestige System</div>
-    <div class="commands-grid">
+    <div class="commands-grid category-grid">
       <div class="command" data-keywords="level info information">
         <strong>-levelinfo</strong>
         <p>Zeigt, wie viele Level es gibt und ab wann Prestige möglich ist.</p>
@@ -625,7 +625,7 @@
     </div>
 
     <div class="category-header">💰 Moodi & Gaming</div>
-    <div class="commands-grid">
+    <div class="commands-grid category-grid">
       <div class="command" data-keywords="moodi grind earn verdienen">
         <strong>-moodi / -m</strong>
         <p>Moodi grinden, XP und Moodi verdienen (mit Streak- und Prestige-Bonus, 1h Cooldown).</p>
@@ -649,7 +649,7 @@
     </div>
 
     <div class="category-header">📊 Stats & Ranglisten</div>
-    <div class="commands-grid">
+    <div class="commands-grid category-grid">
       <div class="command" data-keywords="points punkte moodi xp level">
         <strong>-points</strong>
         <p>Zeigt deine (oder eines Users) Moodi, XP, Level, Prestige und Streak.</p>
@@ -669,7 +669,7 @@
     </div>
 
     <div class="category-header">😴 Status Commands</div>
-    <div class="commands-grid">
+    <div class="commands-grid category-grid">
       <div class="command" data-keywords="afk away from keyboard">
         <strong>-afk <code>[Grund]</code></strong>
         <p>Setzt dich auf AFK, optional mit Grund.</p>
@@ -685,7 +685,7 @@
     </div>
 
     <div class="category-header">ℹ️ Info & Social</div>
-    <div class="commands-grid">
+    <div class="commands-grid category-grid">
       <div class="command" data-keywords="help hilfe commands befehle">
         <strong>-commands / -help</strong>
         <p>Zeigt den Link zu allen Befehlen & Erklärungen.</p>
@@ -705,7 +705,7 @@
     </div>
 
     <div class="category-header">🎉 Fun Commands</div>
-    <div class="commands-grid">
+    <div class="commands-grid category-grid">
       <div class="command" data-keywords="cat katze kitten">
         <strong>-cat</strong>
         <p>Zeigt ein Katzenbild.</p>
@@ -725,7 +725,7 @@
     </div>
 
     <div class="category-header">👤 User Info</div>
-    <div class="commands-grid">
+    <div class="commands-grid category-grid">
       <div class="command" data-keywords="user info twitch information">
         <strong>-user / -u</strong>
         <p>Zeigt Twitch-Infos zu einem Nutzer.</p>
@@ -761,7 +761,7 @@
     </div>
 
     <div class="category-header">🤖 Bot Management</div>
-    <div class="commands-grid">
+    <div class="commands-grid category-grid">
       <div class="command" data-keywords="ping uptime bot status">
         <strong>-ping</strong>
         <p>Zeigt die Bot-Uptime.</p>
@@ -775,13 +775,125 @@
 
   <script>
     // All commands for search functionality
-    let allCommands = [];
-    let originalLayout = null;
+    let allCommands = []; //
+    let originalLayout = null; //
 
     // Animated Background Particles
-    function createParticles() {
-      const container = document.getElementById('bg-container');
-      const particleCount = 30;
+    function createParticles() { //
+      const container = document.getElementById('bg-container'); //
+      const particleCount = 30; //
       
-      for (let i = 0; i < particleCount; i++) {
-        const particle =
+      for (let i = 0; i < particleCount; i++) { //
+        const particle = document.createElement('div'); //
+        particle.classList.add('particle'); //
+        particle.style.width = `${Math.random() * 10 + 5}px`; //
+        particle.style.height = particle.style.width; //
+        particle.style.left = `${Math.random() * 100}%`; //
+        particle.style.top = `${Math.random() * 100}%`; //
+        particle.style.animationDelay = `${Math.random() * 5}s`; //
+        particle.style.animationDuration = `${Math.random() * 10 + 5}s`; //
+        container.appendChild(particle); //
+      }
+    }
+
+    // Scroll Indicator
+    function updateScrollIndicator() { //
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop; //
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight; //
+      const scrolled = (winScroll / height) * 100; //
+      document.querySelector('.scroll-indicator').style.transform = `scaleX(${scrolled / 100})`; //
+    }
+
+    // Navigation Scroll Class
+    function handleNavScroll() { //
+      const nav = document.getElementById('nav'); //
+      if (window.scrollY > 50) { //
+        nav.classList.add('scrolled'); //
+      } else {
+        nav.classList.remove('scrolled'); //
+      }
+    }
+
+    // Command Search Functionality
+    function initializeSearch() { //
+      const searchInput = document.getElementById('search'); //
+      const allCommandElements = document.querySelectorAll('.command'); //
+      const searchResultsContainer = document.getElementById('search-results'); //
+      const searchResultsGrid = document.getElementById('search-results-grid'); //
+      const categoryGrids = document.querySelectorAll('.category-grid'); //
+      const categoryHeaders = document.querySelectorAll('.category-header'); //
+      
+      allCommands = Array.from(allCommandElements).map(commandElement => ({ //
+        element: commandElement, //
+        keywords: commandElement.dataset.keywords ? commandElement.dataset.keywords.toLowerCase() : '', //
+        name: commandElement.querySelector('strong').textContent.toLowerCase() //
+      }));
+
+      // Store original layout to restore when search is cleared
+      originalLayout = new DocumentFragment(); //
+      document.querySelectorAll('main > *').forEach(node => { //
+          originalLayout.appendChild(node.cloneNode(true)); //
+      });
+
+      searchInput.addEventListener('input', (event) => { //
+        const searchTerm = event.target.value.toLowerCase().trim(); //
+        searchResultsGrid.innerHTML = ''; //
+
+        if (searchTerm.length > 0) { //
+          searchResultsContainer.classList.add('active'); //
+          categoryGrids.forEach(grid => grid.classList.add('hidden')); //
+          categoryHeaders.forEach(header => header.classList.add('hidden')); //
+
+          const filteredCommands = allCommands.filter(command => //
+            command.keywords.includes(searchTerm) || command.name.includes(searchTerm) //
+          );
+
+          if (filteredCommands.length > 0) { //
+            filteredCommands.forEach(command => { //
+              const clonedCommand = command.element.cloneNode(true); //
+              clonedCommand.style.opacity = 1; // Ensure cloned commands are visible
+              clonedCommand.style.transform = 'translateY(0)'; // Ensure cloned commands are visible
+              clonedCommand.classList.remove('highlighted'); // Remove highlight from previous search
+              searchResultsGrid.appendChild(clonedCommand); //
+            });
+          } else {
+            const noResults = document.createElement('p'); //
+            noResults.style.color = 'var(--text-muted)'; //
+            noResults.style.textAlign = 'center'; //
+            noResults.style.gridColumn = '1 / -1'; //
+            noResults.textContent = 'Keine Befehle gefunden, die deiner Suche entsprechen.'; //
+            searchResultsGrid.appendChild(noResults); //
+          }
+        } else {
+          searchResultsContainer.classList.remove('active'); //
+          categoryGrids.forEach(grid => grid.classList.remove('hidden')); //
+          categoryHeaders.forEach(header => header.classList.remove('hidden')); //
+          // Re-apply animations if desired when returning to original layout
+          allCommandElements.forEach(cmd => { //
+            cmd.style.opacity = 0; //
+            cmd.style.transform = 'translateY(30px)'; //
+            void cmd.offsetWidth; // Trigger reflow
+            cmd.style.animation = 'none'; // Temporarily disable animation
+            cmd.offsetHeight; // Trigger reflow
+            cmd.style.animation = ''; // Re-enable animation
+          });
+        }
+      });
+    }
+
+    // Event Listeners
+    window.addEventListener('scroll', () => { //
+      updateScrollIndicator(); //
+      handleNavScroll(); //
+    });
+
+    // Initial calls on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => { //
+      createParticles(); //
+      updateScrollIndicator(); //
+      handleNavScroll(); //
+      initializeSearch(); //
+    });
+  </script>
+</body>
+</html>
