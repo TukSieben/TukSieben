@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>MoodgeBot Commands – Alle Befehle</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -13,63 +13,29 @@
     }
 
     :root {
-      --bg-primary: #0a0f0a;
-      --bg-secondary: #0f1510;
-      --bg-tertiary: #141a15;
-      --green-primary: #00ff88;
-      --green-secondary: #00cc6a;
-      --green-tertiary: #1a3d2e;
-      --green-glow: rgba(0, 255, 136, 0.3);
+      --bg-primary: #0f0f0f;
+      --bg-secondary: #1a1a1a;
+      --bg-tertiary: #262626;
+      --bg-elevated: #2a2a2a;
+      --accent-primary: #00d4ff;
+      --accent-secondary: #0099cc;
+      --accent-tertiary: #004d66;
       --text-primary: #ffffff;
-      --text-secondary: #b8c5b8;
-      --text-muted: #6b7669;
-      --border-primary: rgba(0, 255, 136, 0.2);
-      --border-secondary: rgba(255, 255, 255, 0.1);
-      --glass: rgba(20, 26, 21, 0.7);
-      --shadow-green: 0 10px 40px rgba(0, 255, 136, 0.2);
+      --text-secondary: #b3b3b3;
+      --text-muted: #737373;
+      --border-primary: #333333;
+      --border-secondary: #404040;
+      --border-accent: rgba(0, 212, 255, 0.3);
+      --shadow-primary: 0 2px 8px rgba(0, 0, 0, 0.5);
+      --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.3);
     }
 
     body {
       background: var(--bg-primary);
       color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.5;
       overflow-x: hidden;
-      line-height: 1.6;
-      background-image: 
-        radial-gradient(circle at 20% 80%, rgba(0, 255, 136, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 204, 106, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(26, 61, 46, 0.1) 0%, transparent 50%);
-    }
-
-    /* Animated Background */
-    .bg-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 35%, var(--bg-tertiary) 100%);
-    }
-
-    .particle {
-      position: absolute;
-      background: linear-gradient(45deg, var(--green-primary), var(--green-secondary));
-      border-radius: 50%;
-      pointer-events: none;
-      animation: float 8s ease-in-out infinite;
-      opacity: 0.6;
-    }
-
-    @keyframes float {
-      0%, 100% { 
-        transform: translateY(0px) rotate(0deg) scale(1); 
-        opacity: 0.4; 
-      }
-      50% { 
-        transform: translateY(-30px) rotate(180deg) scale(1.2); 
-        opacity: 0.8; 
-      }
     }
 
     /* Navigation */
@@ -77,18 +43,11 @@
       position: fixed;
       top: 0;
       width: 100%;
+      background: rgba(15, 15, 15, 0.95);
       backdrop-filter: blur(20px);
-      background: var(--glass);
-      border-bottom: 1px solid var(--border-secondary);
-      z-index: 100;
-      padding: 1rem 2rem;
-      transition: all 0.3s ease;
-    }
-
-    nav.scrolled {
-      background: rgba(10, 15, 10, 0.95);
-      backdrop-filter: blur(30px);
-      border-bottom-color: var(--border-primary);
+      border-bottom: 1px solid var(--border-primary);
+      z-index: 1000;
+      padding: 1rem 0;
     }
 
     .nav-container {
@@ -97,172 +56,127 @@
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    .header-logo-section {
+    .logo-section {
       display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .header-logo-section img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 2px solid var(--border-primary);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      filter: drop-shadow(0 0 10px var(--green-glow));
-    }
-
-    .header-logo-section:hover img {
-      border-color: var(--green-primary);
-      box-shadow: 0 0 30px var(--green-glow);
-      transform: rotate(360deg) scale(1.1);
+    .logo-section img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--green-primary), var(--green-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      letter-spacing: -0.02em;
-    }
-
-    .logo:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 15px var(--green-glow));
-    }
-
-    /* Search Container */
-    .search-container {
-      flex-grow: 1;
-      margin: 0 2rem;
-      display: flex;
-      justify-content: center;
-      position: relative;
-    }
-
-    .search-container input {
-      width: 100%;
-      max-width: 400px;
-      padding: 0.75rem 1.5rem;
-      background: var(--glass);
-      border: 1px solid var(--border-secondary);
-      border-radius: 25px;
+      font-size: 1.25rem;
+      font-weight: 600;
       color: var(--text-primary);
-      font-size: 1rem;
-      outline: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-family: 'Inter', sans-serif;
-      font-weight: 500;
+      text-decoration: none;
     }
 
-    .search-container input::placeholder {
+    .search-container {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 2rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    }
+
+    .search-input::placeholder {
       color: var(--text-muted);
     }
 
-    .search-container input:focus {
-      border-color: var(--green-primary);
-      box-shadow: 0 0 0 3px var(--green-glow), var(--shadow-green);
-      transform: scale(1.02);
-      background: rgba(20, 26, 21, 0.9);
-    }
-
-    /* Back Button */
     .back-btn {
-      background: var(--glass);
-      border: 1px solid var(--border-secondary);
-      color: var(--text-primary);
       padding: 0.75rem 1.5rem;
-      border-radius: 25px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: 8px;
+      color: var(--text-primary);
       text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
     }
 
     .back-btn:hover {
-      background: var(--green-tertiary);
-      border-color: var(--green-primary);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-green);
-      color: var(--green-primary);
+      background: var(--bg-tertiary);
+      border-color: var(--border-secondary);
     }
 
     /* Main Content */
     main {
-      padding-top: 8rem;
-      min-height: 100vh;
-      max-width: 1000px;
+      padding: 6rem 2rem 4rem;
+      max-width: 1200px;
       margin: 0 auto;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      padding-bottom: 4rem;
     }
 
-    /* Commands Header */
-    .commands-header-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 4rem;
+    /* Header */
+    .header {
       text-align: center;
+      margin-bottom: 3rem;
     }
 
-    .commands-header-container img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 3px solid var(--border-primary);
-      transition: all 0.4s ease;
-      animation: pulse 3s ease-in-out infinite;
-      filter: drop-shadow(0 0 20px var(--green-glow));
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
     }
 
-    @keyframes pulse {
-      0%, 100% { 
-        box-shadow: 0 0 30px var(--green-glow);
-        transform: scale(1);
-      }
-      50% { 
-        box-shadow: 0 0 50px rgba(0, 255, 136, 0.5);
-        transform: scale(1.05);
-      }
+    .header p {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
     }
 
-    .commands-header-container h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--green-primary) 50%, var(--green-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: headerGlow 3s ease-in-out infinite alternate;
-      letter-spacing: -0.02em;
+    /* Stats */
+    .stats {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 3rem;
     }
 
-    @keyframes headerGlow {
-      from { filter: drop-shadow(0 0 20px var(--green-glow)); }
-      to { filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.6)); }
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      min-width: 200px;
     }
 
-    /* Commands Grid */
-    .commands-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 4rem;
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 0.5rem;
     }
 
-    /* Search Results Container */
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Search Results */
     .search-results {
       display: none;
       margin-bottom: 2rem;
@@ -273,152 +187,84 @@
     }
 
     .search-results-header {
-      color: var(--green-primary);
-      font-size: 1.2rem;
+      font-size: 1.125rem;
       font-weight: 600;
+      color: var(--text-primary);
       margin-bottom: 1rem;
-      text-align: center;
     }
 
-    .search-results-grid {
+    /* Category Headers */
+    .category {
+      margin-bottom: 2.5rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-primary);
+    }
+
+    .category-icon {
+      font-size: 1.125rem;
+    }
+
+    /* Commands Grid */
+    .commands-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1rem;
     }
 
     /* Command Cards */
     .command {
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-secondary);
-      border-radius: 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: 12px;
       padding: 1.5rem;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
+      transition: all 0.2s ease;
       cursor: pointer;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: slideInUp 0.6s ease forwards;
-    }
-
-    .command.highlighted {
-      background: rgba(26, 61, 46, 0.3);
-      border-color: var(--green-primary);
-      box-shadow: 0 0 30px var(--green-glow);
-    }
-
-    .command::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--green-primary), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .command::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.05), transparent);
-      transition: left 0.6s ease;
     }
 
     .command:hover {
-      transform: translateY(-8px) scale(1.02);
-      background: rgba(20, 26, 21, 0.8);
-      border-color: var(--green-primary);
-      box-shadow: var(--shadow-green);
+      background: var(--bg-tertiary);
+      border-color: var(--border-secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elevated);
     }
 
-    .command:hover::before {
-      opacity: 1;
+    .command.highlighted {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.2);
     }
 
-    .command:hover::after {
-      left: 100%;
-    }
-
-    .command strong {
-      color: var(--green-primary);
-      font-size: 1.1rem;
-      font-weight: 700;
-      display: block;
+    .command-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--accent-primary);
       margin-bottom: 0.5rem;
-      transition: all 0.3s ease;
-      letter-spacing: -0.01em;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
     }
 
-    .command:hover strong {
-      color: var(--text-primary);
-      text-shadow: 0 0 15px var(--green-glow);
-      transform: translateX(4px);
+    .command-description {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
     }
 
     .command code {
-      background: var(--green-tertiary);
-      color: var(--green-primary);
-      padding: 0.3rem 0.6rem;
-      border-radius: 8px;
-      font-family: 'Inter', monospace;
-      font-weight: 600;
+      background: var(--bg-primary);
+      color: var(--accent-primary);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8125rem;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
       border: 1px solid var(--border-primary);
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-
-    .command:hover code {
-      background: rgba(0, 255, 136, 0.15);
-      color: var(--text-primary);
-      box-shadow: 0 0 20px var(--green-glow);
-      transform: scale(1.05);
-    }
-
-    .command p {
-      margin-top: 0.5rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      font-weight: 400;
-    }
-
-    .command:hover p {
-      color: var(--text-primary);
-    }
-
-    /* Hide/Show Animation */
-    .hidden {
-      display: none !important;
-    }
-
-    /* Staggered Animation Delays */
-    .command:nth-child(1) { animation-delay: 0.1s; }
-    .command:nth-child(2) { animation-delay: 0.15s; }
-    .command:nth-child(3) { animation-delay: 0.2s; }
-    .command:nth-child(4) { animation-delay: 0.25s; }
-    .command:nth-child(5) { animation-delay: 0.3s; }
-    .command:nth-child(6) { animation-delay: 0.35s; }
-    .command:nth-child(7) { animation-delay: 0.4s; }
-    .command:nth-child(8) { animation-delay: 0.45s; }
-    .command:nth-child(9) { animation-delay: 0.5s; }
-    .command:nth-child(10) { animation-delay: 0.55s; }
-    .command:nth-child(n+11) { animation-delay: 0.6s; }
-
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     /* Scroll Indicator */
@@ -426,81 +272,12 @@
       position: fixed;
       top: 0;
       left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--green-secondary), var(--green-primary));
-      z-index: 1000;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
       transform-origin: left;
       transform: scaleX(0);
-      transition: transform 0.2s ease;
-      box-shadow: 0 0 10px var(--green-glow);
-    }
-
-    /* Command Categories */
-    .category-header {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--green-primary);
-      margin: 3rem 0 1.5rem 0;
-      text-align: center;
-      position: relative;
-      letter-spacing: -0.01em;
-    }
-
-    .category-header::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      width: 80px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--green-secondary), var(--green-primary));
-      transform: translateX(-50%);
-      border-radius: 2px;
-    }
-
-    /* Stats Summary */
-    .stats-summary {
-      background: var(--glass);
-      border-radius: 20px;
-      padding: 2.5rem;
-      margin-bottom: 3rem;
-      text-align: center;
-      border: 1px solid var(--border-primary);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stats-summary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--green-primary), transparent);
-    }
-
-    .stats-summary h3 {
-      color: var(--green-primary);
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-      font-weight: 600;
-    }
-
-    .command-count {
-      font-size: 3.5rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--green-primary), var(--green-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.5rem;
-      filter: drop-shadow(0 0 20px var(--green-glow));
-    }
-
-    .stats-summary p {
-      color: var(--text-secondary);
-      font-weight: 500;
+      z-index: 1001;
     }
 
     /* Mobile Responsiveness */
@@ -508,391 +285,391 @@
       .nav-container {
         flex-direction: column;
         gap: 1rem;
-        padding: 0.5rem 0;
+        padding: 0 1rem;
       }
-      
+
       .search-container {
         margin: 0;
-        order: 2;
+        max-width: 100%;
       }
-      
-      .back-btn {
-        order: 1;
-      }
-      
-      main {
-        padding-left: 1rem;
-        padding-right: 1rem;
-        padding-top: 12rem;
-      }
-      
-      .commands-grid, .search-results-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .commands-header-container {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      
-      .commands-header-container img {
-        width: 60px;
-        height: 60px;
-      }
-    }
 
-    @media (max-width: 600px) {
-      .commands-grid, .search-results-grid {
+      main {
+        padding: 8rem 1rem 4rem;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .commands-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .command {
         padding: 1.25rem;
       }
-      
-      .stats-summary {
-        padding: 2rem;
+
+      .stat-card {
+        padding: 1.5rem;
+        min-width: 160px;
       }
     }
 
-    /* Hover effects for better interactivity */
+    /* Animations */
     .command {
-      background-image: linear-gradient(135deg, var(--glass) 0%, rgba(26, 61, 46, 0.1) 100%);
+      animation: fadeInUp 0.5s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
     }
 
-    .command:hover {
-      background-image: linear-gradient(135deg, rgba(20, 26, 21, 0.9) 0%, rgba(26, 61, 46, 0.3) 100%);
+    .command:nth-child(1) { animation-delay: 0.05s; }
+    .command:nth-child(2) { animation-delay: 0.1s; }
+    .command:nth-child(3) { animation-delay: 0.15s; }
+    .command:nth-child(4) { animation-delay: 0.2s; }
+    .command:nth-child(5) { animation-delay: 0.25s; }
+    .command:nth-child(6) { animation-delay: 0.3s; }
+    .command:nth-child(7) { animation-delay: 0.35s; }
+    .command:nth-child(8) { animation-delay: 0.4s; }
+    .command:nth-child(9) { animation-delay: 0.45s; }
+    .command:nth-child(10) { animation-delay: 0.5s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* Enhanced glow effects */
-    .command:hover {
-      box-shadow: 
-        0 20px 40px rgba(0, 255, 136, 0.15),
-        0 0 0 1px var(--green-primary),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    /* Utilities */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--border-secondary);
     }
   </style>
 </head>
 <body>
-  <div class="scroll-indicator"></div>
-  <div class="bg-container" id="bg-container"></div>
+  <div class="scroll-indicator" id="scroll-indicator"></div>
   
-  <nav id="nav">
+  <nav>
     <div class="nav-container">
-      <div class="header-logo-section">
+      <div class="logo-section">
         <img src="Moodge.png" alt="MoodgeBot Logo" onerror="this.style.display='none'">
-        <div class="logo">MoodgeBot</div>
+        <a href="#" class="logo">MoodgeBot</a>
       </div>
       <div class="search-container">
-        <input type="text" id="search" placeholder="🔍 Commands durchsuchen...">
+        <input type="text" class="search-input" id="search" placeholder="Commands durchsuchen...">
       </div>
       <a href="https://moodge.de" class="back-btn">← Zurück</a>
     </div>
   </nav>
 
   <main>
-    <div class="commands-header-container">
-      <img src="Moodge.png" alt="Commands Icon" onerror="this.style.display='none'">
-      <h1>Commands</h1>
+    <div class="header">
+      <h1>Bot Commands</h1>
+      <p>Alle verfügbaren Befehle für deinen Stream</p>
     </div>
 
-    <div class="stats-summary">
-      <h3>Verfügbare Befehle</h3>
-      <div class="command-count">30+</div>
-      <p>Alles was du für deinen Stream brauchst</p>
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Verfügbare Befehle</div>
+      </div>
     </div>
 
     <div class="search-results" id="search-results">
-      <div class="search-results-header">Suchergebnisse:</div>
-      <div class="search-results-grid" id="search-results-grid">
+      <div class="search-results-header">Suchergebnisse</div>
+      <div class="commands-grid" id="search-results-grid"></div>
+    </div>
+
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">🎮</span>
+        <span>Level & Prestige System</span>
+      </div>
+      <div class="commands-grid category-grid">
+        <div class="command" data-keywords="level info information">
+          <div class="command-name">-levelinfo</div>
+          <div class="command-description">Zeigt, wie viele Level es gibt und ab wann Prestige möglich ist.</div>
         </div>
-    </div>
-
-    <div class="category-header">🎮 Level & Prestige System</div>
-    <div class="commands-grid category-grid">
-      <div class="command" data-keywords="level info information">
-        <strong>-levelinfo</strong>
-        <p>Zeigt, wie viele Level es gibt und ab wann Prestige möglich ist.</p>
-      </div>
-      <div class="command" data-keywords="prestige info information">
-        <strong>-prestigeinfo</strong>
-        <p>Listet alle Prestige-Symbole und erklärt den XP-Bonus pro Prestige.</p>
-      </div>
-      <div class="command" data-keywords="prestige">
-        <strong>-prestige</strong>
-        <p>Setzt dich nach Level 15 auf Level 1 zurück, erhöht dein Prestige-Level und gibt dir dauerhaft mehr XP pro Aktion.</p>
+        <div class="command" data-keywords="prestige info information">
+          <div class="command-name">-prestigeinfo</div>
+          <div class="command-description">Listet alle Prestige-Symbole und erklärt den XP-Bonus pro Prestige.</div>
+        </div>
+        <div class="command" data-keywords="prestige">
+          <div class="command-name">-prestige</div>
+          <div class="command-description">Setzt dich nach Level 15 auf Level 1 zurück, erhöht dein Prestige-Level und gibt dir dauerhaft mehr XP pro Aktion.</div>
+        </div>
       </div>
     </div>
 
-    <div class="category-header">💰 Moodi & Gaming</div>
-    <div class="commands-grid category-grid">
-      <div class="command" data-keywords="moodi grind earn verdienen">
-        <strong>-moodi / -m</strong>
-        <p>Moodi grinden, XP und Moodi verdienen (mit Streak- und Prestige-Bonus, 1h Cooldown).</p>
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">💰</span>
+        <span>Moodi & Gaming</span>
       </div>
-      <div class="command" data-keywords="case csgo cs">
-        <strong>-case</strong>
-        <p>Öffnet eine virtuelle CS:GO-Case für 200 Moodi. 60s Cooldown pro User.</p>
-      </div>
-      <div class="command" data-keywords="steal stehlen rob">
-        <strong>-steal / -s</strong>
-        <p>Versuche, einem zufälligen User Moodi zu stehlen.</p>
-      </div>
-      <div class="command" data-keywords="gamble gambling bet wetten">
-        <strong>-gamble <code>&lt;Betrag|all|half&gt;</code></strong>
-        <p>Moodi setzen und mit Glück verdoppeln oder verlieren.</p>
-      </div>
-      <div class="command" data-keywords="daily täglich bonus">
-        <strong>-daily</strong>
-        <p>Täglicher Bonus (Moodi & XP, einmal pro Tag).</p>
-      </div>
-    </div>
-
-    <div class="category-header">📊 Stats & Ranglisten</div>
-    <div class="commands-grid category-grid">
-      <div class="command" data-keywords="points punkte moodi xp level">
-        <strong>-points</strong>
-        <p>Zeigt deine (oder eines Users) Moodi, XP, Level, Prestige und Streak.</p>
-      </div>
-      <div class="command" data-keywords="stats statistics statistiken">
-        <strong>-stats</strong>
-        <p>Zeigt detaillierte Stats (Moodi, XP, Level, Streak, letzter Moodi).</p>
-      </div>
-      <div class="command" data-keywords="top ranking rangliste leaderboard">
-        <strong>-top</strong>
-        <p>Zeigt die Top 5 User nach Moodi.</p>
-      </div>
-      <div class="command" data-keywords="toplevel top level ranking">
-        <strong>-toplevel</strong>
-        <p>Zeigt die Top 5 User nach Level/XP.</p>
+      <div class="commands-grid category-grid">
+        <div class="command" data-keywords="moodi grind earn verdienen">
+          <div class="command-name">-moodi / -m</div>
+          <div class="command-description">Moodi grinden, XP und Moodi verdienen (mit Streak- und Prestige-Bonus, 1h Cooldown).</div>
+        </div>
+        <div class="command" data-keywords="case csgo cs">
+          <div class="command-name">-case</div>
+          <div class="command-description">Öffnet eine virtuelle CS:GO-Case für 200 Moodi. 60s Cooldown pro User.</div>
+        </div>
+        <div class="command" data-keywords="steal stehlen rob">
+          <div class="command-name">-steal / -s</div>
+          <div class="command-description">Versuche, einem zufälligen User Moodi zu stehlen.</div>
+        </div>
+        <div class="command" data-keywords="gamble gambling bet wetten">
+          <div class="command-name">-gamble <code>&lt;Betrag|all|half&gt;</code></div>
+          <div class="command-description">Moodi setzen und mit Glück verdoppeln oder verlieren.</div>
+        </div>
+        <div class="command" data-keywords="daily täglich bonus">
+          <div class="command-name">-daily</div>
+          <div class="command-description">Täglicher Bonus (Moodi & XP, einmal pro Tag).</div>
+        </div>
       </div>
     </div>
 
-    <div class="category-header">😴 Status Commands</div>
-    <div class="commands-grid category-grid">
-      <div class="command" data-keywords="afk away from keyboard">
-        <strong>-afk <code>[Grund]</code></strong>
-        <p>Setzt dich auf AFK, optional mit Grund.</p>
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">📊</span>
+        <span>Stats & Ranglisten</span>
       </div>
-      <div class="command" data-keywords="gn good night schlafen sleep">
-        <strong>-gn <code>[Grund]</code></strong>
-        <p>Setzt dich auf Schlafen, optional mit Grund.</p>
-      </div>
-      <div class="command" data-keywords="remind erinnern message nachricht">
-        <strong>-remind <code>&lt;nutzer&gt; &lt;nachricht&gt;</code></strong>
-        <p>Speichert eine Nachricht für den Nutzer.</p>
-      </div>
-    </div>
-
-    <div class="category-header">ℹ️ Info & Social</div>
-    <div class="commands-grid category-grid">
-      <div class="command" data-keywords="help hilfe commands befehle">
-        <strong>-commands / -help</strong>
-        <p>Zeigt den Link zu allen Befehlen & Erklärungen.</p>
-      </div>
-      <div class="command" data-keywords="uptime stream time">
-        <strong>-uptime</strong>
-        <p>Zeigt die Stream-Uptime.</p>
-      </div>
-      <div class="command" data-keywords="twitter social media">
-        <strong>-twitter, -youtube, -discord</strong>
-        <p>Zeigt Social-Links.</p>
-      </div>
-      <div class="command" data-keywords="translate übersetzen sprache language">
-        <strong>-translate <code>&lt;Text&gt;</code></strong>
-        <p>Übersetzt den angegebenen Text in Deutsch.</p>
+      <div class="commands-grid category-grid">
+        <div class="command" data-keywords="points punkte moodi xp level">
+          <div class="command-name">-points</div>
+          <div class="command-description">Zeigt deine (oder eines Users) Moodi, XP, Level, Prestige und Streak.</div>
+        </div>
+        <div class="command" data-keywords="stats statistics statistiken">
+          <div class="command-name">-stats</div>
+          <div class="command-description">Zeigt detaillierte Stats (Moodi, XP, Level, Streak, letzter Moodi).</div>
+        </div>
+        <div class="command" data-keywords="top ranking rangliste leaderboard">
+          <div class="command-name">-top</div>
+          <div class="command-description">Zeigt die Top 5 User nach Moodi.</div>
+        </div>
+        <div class="command" data-keywords="toplevel top level ranking">
+          <div class="command-name">-toplevel</div>
+          <div class="command-description">Zeigt die Top 5 User nach Level/XP.</div>
+        </div>
       </div>
     </div>
 
-    <div class="category-header">🎉 Fun Commands</div>
-    <div class="commands-grid category-grid">
-      <div class="command" data-keywords="cat katze kitten">
-        <strong>-cat</strong>
-        <p>Zeigt ein Katzenbild.</p>
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">😴</span>
+        <span>Status Commands</span>
       </div>
-      <div class="command" data-keywords="dog hund puppy">
-        <strong>-dog</strong>
-        <p>Zeigt ein Hundebild.</p>
-      </div>
-      <div class="command" data-keywords="joke witz funny lustig">
-        <strong>-joke</strong>
-        <p>Zufälliger Witz.</p>
-      </div>
-      <div class="command" data-keywords="8ball magic ball frage question">
-        <strong>-8ball</strong>
-        <p>Magische 8-Ball-Antwort.</p>
-      </div>
-    </div>
-
-    <div class="category-header">👤 User Info</div>
-    <div class="commands-grid category-grid">
-      <div class="command" data-keywords="user info twitch information">
-        <strong>-user / -u</strong>
-        <p>Zeigt Twitch-Infos zu einem Nutzer.</p>
-      </div>
-      <div class="command" data-keywords="badge 7tv">
-        <strong>-badge</strong>
-        <p>Zeigt das 7TV-Badge eines Users.</p>
-      </div>
-      <div class="command" data-keywords="paint 7tv color farbe">
-        <strong>-paint</strong>
-        <p>Zeigt das 7TV-Paint eines Users.</p>
-      </div>
-      <div class="command" data-keywords="pfp profilbild profile picture avatar">
-        <strong>-pfp</strong>
-        <p>Zeigt das Twitch-Profilbild eines Users als Link im Chat.</p>
-      </div>
-      <div class="command" data-keywords="mlu profile">
-        <strong>-mlu</strong>
-        <p>Zeigt dein MLU-Profil oder das eines anderen Users.</p>
-      </div>
-      <div class="command" data-keywords="vanity profile">
-        <strong>-vanity</strong>
-        <p>Zeigt dein Vanity-Profil oder das eines anderen Users.</p>
-      </div>
-      <div class="command" data-keywords="id twitch 7tv identification">
-        <strong>-id</strong>
-        <p>Zeigt Twitch- und 7TV-ID.</p>
-      </div>
-      <div class="command" data-keywords="7tvu 7tv sub subscription">
-        <strong>-7tvu</strong>
-        <p>Zeigt 7TV-Sub-Status.</p>
+      <div class="commands-grid category-grid">
+        <div class="command" data-keywords="afk away from keyboard">
+          <div class="command-name">-afk <code>[Grund]</code></div>
+          <div class="command-description">Setzt dich auf AFK, optional mit Grund.</div>
+        </div>
+        <div class="command" data-keywords="gn good night schlafen sleep">
+          <div class="command-name">-gn <code>[Grund]</code></div>
+          <div class="command-description">Setzt dich auf Schlafen, optional mit Grund.</div>
+        </div>
+        <div class="command" data-keywords="remind erinnern message nachricht">
+          <div class="command-name">-remind <code>&lt;nutzer&gt; &lt;nachricht&gt;</code></div>
+          <div class="command-description">Speichert eine Nachricht für den Nutzer.</div>
+        </div>
       </div>
     </div>
 
-    <div class="category-header">🤖 Bot Management</div>
-    <div class="commands-grid category-grid">
-      <div class="command" data-keywords="ping uptime bot status">
-        <strong>-ping</strong>
-        <p>Zeigt die Bot-Uptime.</p>
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">ℹ️</span>
+        <span>Info & Social</span>
       </div>
-      <div class="command" data-keywords="owner bot besitzer creator">
-        <strong>-owner</strong>
-        <p>Zeigt den Bot-Owner.</p>
+      <div class="commands-grid category-grid">
+        <div class="command" data-keywords="help hilfe commands befehle">
+          <div class="command-name">-commands / -help</div>
+          <div class="command-description">Zeigt den Link zu allen Befehlen & Erklärungen.</div>
+        </div>
+        <div class="command" data-keywords="uptime stream time">
+          <div class="command-name">-uptime</div>
+          <div class="command-description">Zeigt die Stream-Uptime.</div>
+        </div>
+        <div class="command" data-keywords="twitter social media">
+          <div class="command-name">-twitter, -youtube, -discord</div>
+          <div class="command-description">Zeigt Social-Links.</div>
+        </div>
+        <div class="command" data-keywords="translate übersetzen sprache language">
+          <div class="command-name">-translate <code>&lt;Text&gt;</code></div>
+          <div class="command-description">Übersetzt den angegebenen Text in Deutsch.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">🎉</span>
+        <span>Fun Commands</span>
+      </div>
+      <div class="commands-grid category-grid">
+        <div class="command" data-keywords="cat katze kitten">
+          <div class="command-name">-cat</div>
+          <div class="command-description">Zeigt ein Katzenbild.</div>
+        </div>
+        <div class="command" data-keywords="dog hund puppy">
+          <div class="command-name">-dog</div>
+          <div class="command-description">Zeigt ein Hundebild.</div>
+        </div>
+        <div class="command" data-keywords="joke witz funny lustig">
+          <div class="command-name">-joke</div>
+          <div class="command-description">Zufälliger Witz.</div>
+        </div>
+        <div class="command" data-keywords="8ball magic ball frage question">
+          <div class="command-name">-8ball</div>
+          <div class="command-description">Magische 8-Ball-Antwort.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">👤</span>
+        <span>User Info</span>
+      </div>
+      <div class="commands-grid category-grid">
+        <div class="command" data-keywords="user info twitch information">
+          <div class="command-name">-user / -u</div>
+          <div class="command-description">Zeigt Twitch-Infos zu einem Nutzer.</div>
+        </div>
+        <div class="command" data-keywords="badge 7tv">
+          <div class="command-name">-badge</div>
+          <div class="command-description">Zeigt das 7TV-Badge eines Users.</div>
+        </div>
+        <div class="command" data-keywords="paint 7tv color farbe">
+          <div class="command-name">-paint</div>
+          <div class="command-description">Zeigt das 7TV-Paint eines Users.</div>
+        </div>
+        <div class="command" data-keywords="pfp profilbild profile picture avatar">
+          <div class="command-name">-pfp</div>
+          <div class="command-description">Zeigt das Twitch-Profilbild eines Users als Link im Chat.</div>
+        </div>
+        <div class="command" data-keywords="mlu profile">
+          <div class="command-name">-mlu</div>
+          <div class="command-description">Zeigt dein MLU-Profil oder das eines anderen Users.</div>
+        </div>
+        <div class="command" data-keywords="vanity profile">
+          <div class="command-name">-vanity</div>
+          <div class="command-description">Zeigt dein Vanity-Profil oder das eines anderen Users.</div>
+        </div>
+        <div class="command" data-keywords="id twitch 7tv identification">
+          <div class="command-name">-id</div>
+          <div class="command-description">Zeigt Twitch- und 7TV-ID.</div>
+        </div>
+        <div class="command" data-keywords="7tvu 7tv sub subscription">
+          <div class="command-name">-7tvu</div>
+          <div class="command-description">Zeigt 7TV-Sub-Status.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="category">
+      <div class="category-header">
+        <span class="category-icon">🤖</span>
+        <span>Bot Management</span>
+      </div>
+      <div class="commands-grid category-grid">
+        <div class="command" data-keywords="ping uptime bot status">
+          <div class="command-name">-ping</div>
+          <div class="command-description">Zeigt die Bot-Uptime.</div>
+        </div>
+        <div class="command" data-keywords="owner bot besitzer creator">
+          <div class="command-name">-owner</div>
+          <div class="command-description">Zeigt den Bot-Owner.</div>
+        </div>
       </div>
     </div>
   </main>
 
   <script>
-    // All commands for search functionality
-    let allCommands = []; //
-    let originalLayout = null; //
-
-    // Animated Background Particles
-    function createParticles() { //
-      const container = document.getElementById('bg-container'); //
-      const particleCount = 30; //
-      
-      for (let i = 0; i < particleCount; i++) { //
-        const particle = document.createElement('div'); //
-        particle.classList.add('particle'); //
-        particle.style.width = `${Math.random() * 10 + 5}px`; //
-        particle.style.height = particle.style.width; //
-        particle.style.left = `${Math.random() * 100}%`; //
-        particle.style.top = `${Math.random() * 100}%`; //
-        particle.style.animationDelay = `${Math.random() * 5}s`; //
-        particle.style.animationDuration = `${Math.random() * 10 + 5}s`; //
-        container.appendChild(particle); //
-      }
-    }
+    let allCommands = [];
 
     // Scroll Indicator
-    function updateScrollIndicator() { //
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop; //
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight; //
-      const scrolled = (winScroll / height) * 100; //
-      document.querySelector('.scroll-indicator').style.transform = `scaleX(${scrolled / 100})`; //
+    function updateScrollIndicator() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('scroll-indicator').style.transform = `scaleX(${scrolled / 100})`;
     }
 
-    // Navigation Scroll Class
-    function handleNavScroll() { //
-      const nav = document.getElementById('nav'); //
-      if (window.scrollY > 50) { //
-        nav.classList.add('scrolled'); //
-      } else {
-        nav.classList.remove('scrolled'); //
-      }
-    }
+    // Search Functionality
+    function initializeSearch() {
+      const searchInput = document.getElementById('search');
+      const allCommandElements = document.querySelectorAll('.command');
+      const searchResultsContainer = document.getElementById('search-results');
+      const searchResultsGrid = document.getElementById('search-results-grid');
+      const categories = document.querySelectorAll('.category');
 
-    // Command Search Functionality
-    function initializeSearch() { //
-      const searchInput = document.getElementById('search'); //
-      const allCommandElements = document.querySelectorAll('.command'); //
-      const searchResultsContainer = document.getElementById('search-results'); //
-      const searchResultsGrid = document.getElementById('search-results-grid'); //
-      const categoryGrids = document.querySelectorAll('.category-grid'); //
-      const categoryHeaders = document.querySelectorAll('.category-header'); //
-      
-      allCommands = Array.from(allCommandElements).map(commandElement => ({ //
-        element: commandElement, //
-        keywords: commandElement.dataset.keywords ? commandElement.dataset.keywords.toLowerCase() : '', //
-        name: commandElement.querySelector('strong').textContent.toLowerCase() //
+      allCommands = Array.from(allCommandElements).map(commandElement => ({
+        element: commandElement,
+        keywords: commandElement.dataset.keywords ? commandElement.dataset.keywords.toLowerCase() : '',
+        name: commandElement.querySelector('.command-name').textContent.toLowerCase()
       }));
 
-      // Store original layout to restore when search is cleared
-      originalLayout = new DocumentFragment(); //
-      document.querySelectorAll('main > *').forEach(node => { //
-          originalLayout.appendChild(node.cloneNode(true)); //
-      });
+      searchInput.addEventListener('input', (event) => {
+        const searchTerm = event.target.value.toLowerCase().trim();
+        searchResultsGrid.innerHTML = '';
 
-      searchInput.addEventListener('input', (event) => { //
-        const searchTerm = event.target.value.toLowerCase().trim(); //
-        searchResultsGrid.innerHTML = ''; //
+        if (searchTerm.length > 0) {
+          searchResultsContainer.classList.add('active');
+          categories.forEach(category => category.classList.add('hidden'));
 
-        if (searchTerm.length > 0) { //
-          searchResultsContainer.classList.add('active'); //
-          categoryGrids.forEach(grid => grid.classList.add('hidden')); //
-          categoryHeaders.forEach(header => header.classList.add('hidden')); //
-
-          const filteredCommands = allCommands.filter(command => //
-            command.keywords.includes(searchTerm) || command.name.includes(searchTerm) //
+          const filteredCommands = allCommands.filter(command =>
+            command.keywords.includes(searchTerm) || command.name.includes(searchTerm)
           );
 
-          if (filteredCommands.length > 0) { //
-            filteredCommands.forEach(command => { //
-              const clonedCommand = command.element.cloneNode(true); //
-              clonedCommand.style.opacity = 1; // Ensure cloned commands are visible
-              clonedCommand.style.transform = 'translateY(0)'; // Ensure cloned commands are visible
-              clonedCommand.classList.remove('highlighted'); // Remove highlight from previous search
-              searchResultsGrid.appendChild(clonedCommand); //
+          if (filteredCommands.length > 0) {
+            filteredCommands.forEach(command => {
+              const clonedCommand = command.element.cloneNode(true);
+              clonedCommand.style.opacity = '1';
+              clonedCommand.style.transform = 'translateY(0)';
+              clonedCommand.classList.add('highlighted');
+              searchResultsGrid.appendChild(clonedCommand);
             });
           } else {
-            const noResults = document.createElement('p'); //
-            noResults.style.color = 'var(--text-muted)'; //
-            noResults.style.textAlign = 'center'; //
-            noResults.style.gridColumn = '1 / -1'; //
-            noResults.textContent = 'Keine Befehle gefunden, die deiner Suche entsprechen.'; //
-            searchResultsGrid.appendChild(noResults); //
+            const noResults = document.createElement('div');
+            noResults.style.color = 'var(--text-muted)';
+            noResults.style.textAlign = 'center';
+            noResults.style.gridColumn = '1 / -1';
+            noResults.style.padding = '2rem';
+            noResults.textContent = 'Keine Befehle gefunden';
+            searchResultsGrid.appendChild(noResults);
           }
         } else {
-          searchResultsContainer.classList.remove('active'); //
-          categoryGrids.forEach(grid => grid.classList.remove('hidden')); //
-          categoryHeaders.forEach(header => header.classList.remove('hidden')); //
-          // Re-apply animations if desired when returning to original layout
-          allCommandElements.forEach(cmd => { //
-            cmd.style.opacity = 0; //
-            cmd.style.transform = 'translateY(30px)'; //
-            void cmd.offsetWidth; // Trigger reflow
-            cmd.style.animation = 'none'; // Temporarily disable animation
-            cmd.offsetHeight; // Trigger reflow
-            cmd.style.animation = ''; // Re-enable animation
-          });
+          searchResultsContainer.classList.remove('active');
+          categories.forEach(category => category.classList.remove('hidden'));
         }
       });
     }
 
     // Event Listeners
-    window.addEventListener('scroll', () => { //
-      updateScrollIndicator(); //
-      handleNavScroll(); //
-    });
+    window.addEventListener('scroll', updateScrollIndicator);
 
-    // Initial calls on DOMContentLoaded
-    document.addEventListener('DOMContentLoaded', () => { //
-      createParticles(); //
-      updateScrollIndicator(); //
-      handleNavScroll(); //
-      initializeSearch(); //
+    document.addEventListener('DOMContentLoaded', () => {
+      updateScrollIndicator();
+      initializeSearch();
     });
   </script>
 </body>
