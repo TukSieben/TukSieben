@@ -229,6 +229,7 @@
       padding: 1.5rem;
       transition: all 0.2s ease;
       cursor: pointer;
+      overflow: hidden;
     }
 
     .command:hover {
@@ -243,18 +244,44 @@
       box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.2);
     }
 
+    .command.expanded {
+      border-color: var(--accent-primary);
+      background: var(--bg-tertiary);
+    }
+
     .command-name {
       font-size: 1.125rem;
       font-weight: 600;
       color: var(--accent-primary);
       margin-bottom: 0.5rem;
       font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .expand-icon {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      transition: transform 0.2s ease;
+    }
+
+    .command.expanded .expand-icon {
+      transform: rotate(180deg);
     }
 
     .command-description {
       font-size: 0.875rem;
       color: var(--text-secondary);
       line-height: 1.5;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding-top 0.3s ease;
+    }
+
+    .command.expanded .command-description {
+      max-height: 200px;
+      padding-top: 0.5rem;
     }
 
     .command code {
@@ -405,15 +432,24 @@
       </div>
       <div class="commands-grid category-grid">
         <div class="command" data-keywords="level info information">
-          <div class="command-name">-levelinfo</div>
+          <div class="command-name">
+            -levelinfo
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows how many levels exist and when prestige becomes available.</div>
         </div>
         <div class="command" data-keywords="prestige info information">
-          <div class="command-name">-prestigeinfo</div>
+          <div class="command-name">
+            -prestigeinfo
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Lists all prestige symbols and explains the XP bonus per prestige.</div>
         </div>
         <div class="command" data-keywords="prestige">
-          <div class="command-name">-prestige</div>
+          <div class="command-name">
+            -prestige
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Resets you to Level 1 after Level 15, increases your prestige level and permanently gives you more XP per action.</div>
         </div>
       </div>
@@ -426,23 +462,38 @@
       </div>
       <div class="commands-grid category-grid">
         <div class="command" data-keywords="moodi grind earn">
-          <div class="command-name">-moodi / -m</div>
+          <div class="command-name">
+            -moodi / -m
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Grind Moodi, earn XP and Moodi (with streak and prestige bonus, 1h cooldown).</div>
         </div>
         <div class="command" data-keywords="case csgo cs">
-          <div class="command-name">-case</div>
+          <div class="command-name">
+            -case
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Opens a virtual CS:GO case for 200 Moodi. 60s cooldown per user.</div>
         </div>
         <div class="command" data-keywords="steal rob">
-          <div class="command-name">-steal / -s</div>
+          <div class="command-name">
+            -steal / -s
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Try to steal Moodi from a random user.</div>
         </div>
         <div class="command" data-keywords="gamble gambling bet">
-          <div class="command-name">-gamble <code>&lt;Amount|all|half&gt;</code></div>
+          <div class="command-name">
+            -gamble <code>&lt;Amount|all|half&gt;</code>
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Bet Moodi and either double or lose it with luck.</div>
         </div>
         <div class="command" data-keywords="daily bonus">
-          <div class="command-name">-daily</div>
+          <div class="command-name">
+            -daily
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Daily bonus (Moodi & XP, once per day).</div>
         </div>
       </div>
@@ -455,19 +506,31 @@
       </div>
       <div class="commands-grid category-grid">
         <div class="command" data-keywords="points moodi xp level">
-          <div class="command-name">-points</div>
+          <div class="command-name">
+            -points
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows your (or a user's) Moodi, XP, Level, Prestige and Streak.</div>
         </div>
         <div class="command" data-keywords="stats statistics">
-          <div class="command-name">-stats</div>
+          <div class="command-name">
+            -stats
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows detailed stats (Moodi, XP, Level, Streak, last Moodi).</div>
         </div>
         <div class="command" data-keywords="top ranking leaderboard">
-          <div class="command-name">-top</div>
+          <div class="command-name">
+            -top
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows the top 5 users by Moodi.</div>
         </div>
         <div class="command" data-keywords="toplevel top level ranking">
-          <div class="command-name">-toplevel</div>
+          <div class="command-name">
+            -toplevel
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows the top 5 users by Level/XP.</div>
         </div>
       </div>
@@ -480,15 +543,24 @@
       </div>
       <div class="commands-grid category-grid">
         <div class="command" data-keywords="afk away from keyboard">
-          <div class="command-name">-afk <code>[Reason]</code></div>
+          <div class="command-name">
+            -afk <code>[Reason]</code>
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Sets you as AFK, optionally with a reason.</div>
         </div>
         <div class="command" data-keywords="gn good night sleep">
-          <div class="command-name">-gn <code>[Reason]</code></div>
+          <div class="command-name">
+            -gn <code>[Reason]</code>
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Sets you as sleeping, optionally with a reason.</div>
         </div>
         <div class="command" data-keywords="remind reminder time timer message">
-          <div class="command-name">-remind <code>&lt;User|me&gt; &lt;Time&gt; &lt;Message&gt;</code></div>
+          <div class="command-name">
+            -remind <code>&lt;User|me&gt; &lt;Time&gt; &lt;Message&gt;</code>
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Reminds you or another user after the specified time automatically in chat.<br>
     Without time, the message is displayed when the user next writes.</div>
         </div>
@@ -502,23 +574,38 @@
       </div>
       <div class="commands-grid category-grid">
         <div class="command" data-keywords="help commands">
-          <div class="command-name">-commands / -help</div>
+          <div class="command-name">
+            -commands / -help
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows the link to all commands & explanations.</div>
         </div>
         <div class="command" data-keywords="uptime stream time">
-          <div class="command-name">-uptime</div>
+          <div class="command-name">
+            -uptime
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows the stream uptime.</div>
         </div>
         <div class="command" data-keywords="twitter social media">
-          <div class="command-name">-twitter, -youtube, -discord</div>
+          <div class="command-name">
+            -twitter, -youtube, -discord
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows social links.</div>
         </div>
         <div class="command" data-keywords="translate language">
-          <div class="command-name">-translate <code>&lt;Text&gt;</code></div>
+          <div class="command-name">
+            -translate <code>&lt;Text&gt;</code>
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Translates the specified text to German.</div>
         </div>
         <div class="command" data-keywords="twitch namechanges">
-          <div class="command-name">-namechange / -nc</div>
+          <div class="command-name">
+            -namechange / -nc
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">View the name history of a Twitch user (or your own).</div>
         </div>
       </div>
@@ -531,19 +618,31 @@
       </div>
       <div class="commands-grid category-grid">
         <div class="command" data-keywords="cat kitten">
-          <div class="command-name">-cat</div>
+          <div class="command-name">
+            -cat
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows a cat image.</div>
         </div>
         <div class="command" data-keywords="dog puppy">
-          <div class="command-name">-dog</div>
+          <div class="command-name">
+            -dog
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows a dog image.</div>
         </div>
         <div class="command" data-keywords="joke funny">
-          <div class="command-name">-joke</div>
+          <div class="command-name">
+            -joke
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Random joke.</div>
         </div>
         <div class="command" data-keywords="8ball magic ball question">
-          <div class="command-name">-8ball</div>
+          <div class="command-name">
+            -8ball
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Magic 8-ball answer.</div>
         </div>
       </div>
@@ -556,39 +655,66 @@
       </div>
       <div class="commands-grid category-grid">
         <div class="command" data-keywords="user info twitch information">
-          <div class="command-name">-user / -u</div>
+          <div class="command-name">
+            -user / -u
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows Twitch info about a user.</div>
         </div>
         <div class="command" data-keywords="badge 7tv">
-          <div class="command-name">-badge</div>
+          <div class="command-name">
+            -badge
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows a user's 7TV badge.</div>
         </div>
         <div class="command" data-keywords="paint 7tv color">
-          <div class="command-name">-paint</div>
+          <div class="command-name">
+            -paint
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows a user's 7TV paint.</div>
         </div>
         <div class="command" data-keywords="pfp profile picture avatar">
-          <div class="command-name">-pfp</div>
+          <div class="command-name">
+            -pfp
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows a user's Twitch profile picture as a link in chat.</div>
         </div>
         <div class="command" data-keywords="header banner twitch">
-          <div class="command-name">-header</div>
+          <div class="command-name">
+            -header
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows a user's Twitch banner/header as a link in chat.</div>       
          </div>         
           <div class="command" data-keywords="mlu profile">
-          <div class="command-name">-mlu</div>
+          <div class="command-name">
+            -mlu
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows your MLU profile or that of another user.</div>
         </div>
         <div class="command" data-keywords="vanity profile">
-          <div class="command-name">-vanity</div>
+          <div class="command-name">
+            -vanity
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows your Vanity profile or that of another user.</div>
         </div>
         <div class="command" data-keywords="id twitch 7tv identification">
-          <div class="command-name">-id</div>
+          <div class="command-name">
+            -id
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows Twitch and 7TV ID.</div>
         </div>
         <div class="command" data-keywords="7tva 7tv sub subscription">
-          <div class="command-name">-7tva</div>
+          <div class="command-name">
+            -7tva
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows 7TV subscription status.</div>
         </div>
       </div>
@@ -601,11 +727,17 @@
       </div>
       <div class="commands-grid category-grid">
         <div class="command" data-keywords="ping uptime bot status">
-          <div class="command-name">-ping</div>
+          <div class="command-name">
+            -ping
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows the bot uptime.</div>
         </div>
         <div class="command" data-keywords="owner bot creator">
-          <div class="command-name">-owner</div>
+          <div class="command-name">
+            -owner
+            <span class="expand-icon">▼</span>
+          </div>
           <div class="command-description">Shows the bot owner.</div>
         </div>
       </div>
@@ -621,6 +753,17 @@
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
       document.getElementById('scroll-indicator').style.transform = `scaleX(${scrolled / 100})`;
+    }
+
+    // Command Toggle Functionality
+    function initializeCommandToggle() {
+      const commands = document.querySelectorAll('.command');
+      
+      commands.forEach(command => {
+        command.addEventListener('click', () => {
+          command.classList.toggle('expanded');
+        });
+      });
     }
 
     // Search Functionality
@@ -655,6 +798,12 @@
               clonedCommand.style.opacity = '1';
               clonedCommand.style.transform = 'translateY(0)';
               clonedCommand.classList.add('highlighted');
+              
+              // Add click functionality to cloned commands
+              clonedCommand.addEventListener('click', () => {
+                clonedCommand.classList.toggle('expanded');
+              });
+              
               searchResultsGrid.appendChild(clonedCommand);
             });
           } else {
@@ -679,6 +828,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       updateScrollIndicator();
       initializeSearch();
+      initializeCommandToggle();
     });
   </script>
 </body>
