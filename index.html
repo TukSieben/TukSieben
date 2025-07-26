@@ -172,48 +172,13 @@
             transform: translateY(-2px);
         }
 
-        /* Language Selector */
-        .language-selector {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .lang-btn {
-            padding: 0.5rem 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-primary);
-            border-radius: 25px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .lang-btn:hover, .lang-btn.active {
-            background: rgba(139, 92, 246, 0.1);
-            border-color: var(--border-glow);
-            color: var(--text-primary);
-        }
-
-        .lang-btn.active {
-            background: var(--gradient-primary);
-            color: white;
-        }
-
         /* Footer */
         footer {
             background: var(--bg-secondary);
             border-top: 1px solid var(--border-primary);
             padding: 2rem 0;
             text-align: center;
-            margin-top: 4rem;
+            margin-top: 0;
         }
 
         footer a {
@@ -225,15 +190,6 @@
 
         footer a:hover {
             color: var(--accent-secondary);
-        }
-
-        /* Language content sections */
-        .lang-content {
-            display: none;
-        }
-
-        .lang-content.active {
-            display: block;
         }
 
         /* Responsive Design */
@@ -250,10 +206,6 @@
                 flex-direction: column;
                 align-items: center;
             }
-
-            .language-selector {
-                gap: 0.5rem;
-            }
         }
     </style>
 </head>
@@ -265,7 +217,7 @@
                 <a href="#" class="logo">MoodgeBot</a>
             </div>
             <div class="nav-links">
-                <a href="https://moodge.de/commands/" id="nav-commands">Commands</a>
+                <a href="https://moodge.de/commands/">Commands</a>
             </div>
         </div>
     </nav>
@@ -274,76 +226,17 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">MoodgeBot</h1>
-                
-                <!-- English Content -->
-                <div class="lang-content active" data-lang="en">
-                    <p class="hero-subtitle">Gaming & Gambling Bot</p>
-                    <p class="hero-description">
-                        MoodgeBot is a feature-rich Twitch bot with gambling games, leveling system, and interactive commands. Check out all commands to see what it can do!
-                    </p>
-                    <div class="btn-group">
-                        <a href="https://www.twitch.tv/moodgebot/about" class="btn btn-primary">
-                            🤖 Add Bot
-                        </a>
-                        <a href="https://moodge.de/commands/" class="btn btn-secondary">
-                            📖 View Commands
-                        </a>
-                    </div>
-                </div>
-
-                <!-- German Content -->
-                <div class="lang-content" data-lang="de">
-                    <p class="hero-subtitle">Gaming & Gambling Bot</p>
-                    <p class="hero-description">
-                        MoodgeBot ist ein vielseitiger Twitch Bot mit Glücksspielen, Leveling-System und interaktiven Befehlen. Schau dir alle Befehle an um zu sehen was er kann!
-                    </p>
-                    <div class="btn-group">
-                        <a href="https://www.twitch.tv/moodgebot/about" class="btn btn-primary">
-                            🤖 Bot hinzufügen
-                        </a>
-                        <a href="https://moodge.de/commands/" class="btn btn-secondary">
-                            📖 Befehle anzeigen
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Spanish Content -->
-                <div class="lang-content" data-lang="es">
-                    <p class="hero-subtitle">Bot de Juegos y Apuestas</p>
-                    <p class="hero-description">
-                        MoodgeBot es un bot de Twitch completo con juegos de apuestas, sistema de niveles y comandos interactivos. ¡Mira todos los comandos para ver qué puede hacer!
-                    </p>
-                    <div class="btn-group">
-                        <a href="https://www.twitch.tv/moodgebot/about" class="btn btn-primary">
-                            🤖 Añadir Bot
-                        </a>
-                        <a href="https://moodge.de/commands/" class="btn btn-secondary">
-                            📖 Ver Comandos
-                        </a>
-                    </div>
-                </div>
-
-                <!-- French Content -->
-                <div class="lang-content" data-lang="fr">
-                    <p class="hero-subtitle">Bot de Jeu et Paris</p>
-                    <p class="hero-description">
-                        MoodgeBot est un bot Twitch complet avec des jeux de hasard, un système de niveau et des commandes interactives. Consultez toutes les commandes pour voir ce qu'il peut faire !
-                    </p>
-                    <div class="btn-group">
-                        <a href="https://www.twitch.tv/moodgebot/about" class="btn btn-primary">
-                            🤖 Ajouter Bot
-                        </a>
-                        <a href="https://moodge.de/commands/" class="btn btn-secondary">
-                            📖 Voir Commandes
-                        </a>
-                    </div>
-                </div>
-
-                <div class="language-selector">
-                    <a href="#" class="lang-btn active" data-lang="en">🦅 English</a>
-                    <a href="#" class="lang-btn" data-lang="de">🍺 German</a>
-                    <a href="#" class="lang-btn" data-lang="es">🌮 Español</a>
-                    <a href="#" class="lang-btn" data-lang="fr">🥖 Français</a>
+                <p class="hero-subtitle">Gaming & Gambling Bot</p>
+                <p class="hero-description">
+                    MoodgeBot is a feature-rich Twitch bot with gambling games, leveling system, and interactive commands. Check out all commands to see what it can do!
+                </p>
+                <div class="btn-group">
+                    <a href="https://www.twitch.tv/moodgebot/about" class="btn btn-primary">
+                        🤖 Add Bot
+                    </a>
+                    <a href="https://moodge.de/commands/" class="btn btn-secondary">
+                        📖 View Commands
+                    </a>
                 </div>
             </div>
         </div>
@@ -358,45 +251,6 @@
     </footer>
 
     <script>
-        // Language switching functionality
-        const langButtons = document.querySelectorAll('.lang-btn');
-        const langContents = document.querySelectorAll('.lang-content');
-        const navCommands = document.getElementById('nav-commands');
-
-        const translations = {
-            'nav-commands': {
-                en: 'Commands',
-                de: 'Befehle',
-                es: 'Comandos',
-                fr: 'Commandes'
-            }
-        };
-
-        langButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const selectedLang = btn.getAttribute('data-lang');
-                
-                // Update active language button
-                langButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Update content visibility
-                langContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.getAttribute('data-lang') === selectedLang) {
-                        content.classList.add('active');
-                    }
-                });
-
-                // Update navigation text
-                navCommands.textContent = translations['nav-commands'][selectedLang];
-                
-                // Update HTML lang attribute
-                document.documentElement.lang = selectedLang;
-            });
-        });
-
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
